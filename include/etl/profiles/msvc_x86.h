@@ -28,8 +28,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ******************************************************************************/
 
-#ifndef __ETL_MSVC__
-#define __ETL_MSVC__
+#ifndef ETL_MSVC_INCLUDED
+#define ETL_MSVC_INCLUDED
 
 //*****************************************************************************
 // Microsoft Visual Studio
@@ -46,6 +46,5 @@ SOFTWARE.
 #define ETL_NO_NULLPTR_SUPPORT                     !ETL_CPP11_SUPPORTED
 #define ETL_NO_LARGE_CHAR_SUPPORT                  !ETL_CPP11_SUPPORTED
 #define ETL_CPP11_TYPE_TRAITS_IS_TRIVIAL_SUPPORTED ETL_CPP14_SUPPORTED
-#define ETL_ATOMIC_SUPPORTED                       ETL_CPP11_SUPPORTED
 
 #endif

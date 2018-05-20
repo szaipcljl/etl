@@ -327,21 +327,30 @@
     <ClInclude Include="..\..\include\etl\array_wrapper.h" />
     <ClInclude Include="..\..\include\etl\atomic.h" />
     <ClInclude Include="..\..\include\etl\atomic\atomic_arm.h" />
-    <ClInclude Include="..\..\include\etl\atomic\atomic_gcc.h" />
+    <ClInclude Include="..\..\include\etl\atomic\atomic_gcc_sync.h" />
+    <ClInclude Include="..\..\include\etl\atomic\atomic_std.h" />
     <ClInclude Include="..\..\include\etl\callback_timer.h" />
+    <ClInclude Include="..\..\include\etl\combinations.h" />
     <ClInclude Include="..\..\include\etl\compare.h" />
     <ClInclude Include="..\..\include\etl\constant.h" />
+    <ClInclude Include="..\..\include\etl\crc32_c.h" />
     <ClInclude Include="..\..\include\etl\c\ecl_timer.h" />
     <ClInclude Include="..\..\include\etl\fsm.h" />
     <ClInclude Include="..\..\include\etl\fsm_generator.h" />
     <ClInclude Include="..\..\include\etl\largest_generator.h" />
+    <ClInclude Include="..\..\include\etl\memory_model.h" />
     <ClInclude Include="..\..\include\etl\message.h" />
     <ClInclude Include="..\..\include\etl\message_bus.h" />
     <ClInclude Include="..\..\include\etl\message_timer.h" />
     <ClInclude Include="..\..\include\etl\message_types.h" />
     <ClInclude Include="..\..\include\etl\message_router.h" />
     <ClInclude Include="..\..\include\etl\message_router_generator.h" />
+    <ClInclude Include="..\..\include\etl\mutex.h" />
+    <ClInclude Include="..\..\include\etl\mutex\mutex_arm.h" />
+    <ClInclude Include="..\..\include\etl\mutex\mutex_gcc_sync.h" />
+    <ClInclude Include="..\..\include\etl\mutex\mutex_std.h" />
     <ClInclude Include="..\..\include\etl\packet.h" />
+    <ClInclude Include="..\..\include\etl\permutations.h" />
     <ClInclude Include="..\..\include\etl\profiles\arduino_arm.h" />
     <ClInclude Include="..\..\include\etl\profiles\armv5.h" />
     <ClInclude Include="..\..\include\etl\profiles\armv6.h" />
@@ -355,12 +364,17 @@
     <ClInclude Include="..\..\include\etl\profiles\ticc.h" />
     <ClInclude Include="..\..\include\etl\scheduler.h" />
     <ClInclude Include="..\..\include\etl\smallest_generator.h" />
+    <ClInclude Include="..\..\include\etl\queue_spsc_atomic.h" />
+    <ClInclude Include="..\..\include\etl\queue_spsc_isr.h" />
+    <ClInclude Include="..\..\include\etl\queue_mpmc_mutex.h" />
     <ClInclude Include="..\..\include\etl\sqrt.h" />
     <ClInclude Include="..\..\include\etl\string_view.h" />
     <ClInclude Include="..\..\include\etl\task.h" />
     <ClInclude Include="..\..\include\etl\timer.h" />
     <ClInclude Include="..\..\include\etl\type_lookup.h" />
     <ClInclude Include="..\..\include\etl\type_lookup_generator.h" />
+    <ClInclude Include="..\..\include\etl\type_select.h" />
+    <ClInclude Include="..\..\include\etl\type_select_generator.h" />
     <ClInclude Include="..\..\include\etl\type_traits_generator.h" />
     <ClInclude Include="..\..\include\etl\variant_pool.h" />
     <ClInclude Include="..\..\include\etl\variant_pool_generator.h" />
@@ -502,6 +516,7 @@
     <ClCompile Include="..\..\src\crc16_ccitt.cpp" />
     <ClCompile Include="..\..\src\crc16_kermit.cpp" />
     <ClCompile Include="..\..\src\crc32.cpp" />
+    <ClCompile Include="..\..\src\crc32_c.cpp" />
     <ClCompile Include="..\..\src\crc64_ecma.cpp" />
     <ClCompile Include="..\..\src\crc8_ccitt.cpp" />
     <ClCompile Include="..\..\src\c\ecl_timer.c" />
@@ -539,6 +554,7 @@
     </ClCompile>
     <ClCompile Include="..\test_array_view.cpp" />
     <ClCompile Include="..\test_array_wrapper.cpp" />
+    <ClCompile Include="..\test_atomic_std.cpp" />
     <ClCompile Include="..\test_binary.cpp" />
     <ClCompile Include="..\test_bitset.cpp" />
     <ClCompile Include="..\test_bloom_filter.cpp" />
@@ -666,6 +682,9 @@
     <ClCompile Include="..\test_pool.cpp" />
     <ClCompile Include="..\test_priority_queue.cpp" />
     <ClCompile Include="..\test_queue.cpp" />
+    <ClCompile Include="..\test_queue_mpmc_mutex.cpp" />
+    <ClCompile Include="..\test_queue_spsc_atomic.cpp" />
+    <ClCompile Include="..\test_queue_spsc_isr.cpp" />
     <ClCompile Include="..\test_random.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
@@ -688,6 +707,7 @@
     <ClCompile Include="..\test_task_scheduler.cpp" />
     <ClCompile Include="..\test_type_def.cpp" />
     <ClCompile Include="..\test_type_lookup.cpp" />
+    <ClCompile Include="..\test_type_select.cpp" />
     <ClCompile Include="..\test_type_traits.cpp" />
     <ClCompile Include="..\test_unordered_map.cpp" />
     <ClCompile Include="..\test_unordered_multimap.cpp" />
@@ -708,6 +728,7 @@
     <None Include="..\..\Doxyfile" />
     <None Include="..\..\etl.pspimage" />
     <None Include="..\..\etl.xar" />
+    <None Include="..\..\include\etl\generate_type_select.bat" />
     <None Include="..\..\library.properties" />
     <None Include="..\..\include\etl\generate.bat" />
     <None Include="..\..\include\etl\generate_fsm.bat" />

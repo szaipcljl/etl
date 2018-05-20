@@ -1,3 +1,5 @@
+///\file
+
 /******************************************************************************
 The MIT License(MIT)
 
@@ -5,7 +7,7 @@ Embedded Template Library.
 https://github.com/ETLCPP/etl
 https://www.etlcpp.com
 
-Copyright(c) 2017 jwellbelove
+Copyright(c) 2018 jwellbelove
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files(the "Software"), to deal
@@ -26,79 +28,19 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ******************************************************************************/
 
-#ifndef __ETL_ATOMIC_WINDOWS__
-#define __ETL_ATOMIC_WINDOWS__
+#ifndef ETL_MEMORY_MODEL_INCLUDED
+#define ETL_MEMORY_MODEL_INCLUDED
 
-#include "../platform.h"
-
-#include <stdint.h>
-#include <Windows.h>
+#include "user_type.h"
 
 namespace etl
 {
-  class atomic_uint32_t
-  {
-  public:
-
-    atomic_uint32_t()
-    {
-      InterlockedExchange(&value, 0);
-    }
-
-    atomic_uint32_t(uint32_t v)
-    {
-      InterlockedExchange(&value, v);
-    }
-
-    atomic_uint32_t& operator =(uint32_t v)
-    {
-      InterlockedExchange(&value, v);
-
-      return *this;
-    }
-
-    atomic_uint32_t& operator ++()
-    {
-      InterlockedIncrement(&value);
-
-      return *this;
-    }
-
-    volatile atomic_uint32_t& operator ++() volatile
-    {
-      InterlockedIncrement(&value);
-
-      return *this;
-    }
-
-    atomic_uint32_t& operator --()
-    {
-      InterlockedDecrement(&value);
-
-      return *this;
-    }
-
-    volatile atomic_uint32_t& operator --() volatile
-    {
-      InterlockedDecrement(&value);
-
-      return *this;
-    }
-
-    operator uint32_t () const
-    {
-      return InterlockedAdd((volatile long*)&value, 0);
-    }
-
-    operator uint32_t() volatile const
-    {
-      return InterlockedAdd((volatile long*)&value, 0);
-    }
-
-  private:
-
-    uint32_t value;
-  };
+  ETL_DECLARE_USER_TYPE(memory_model, int)
+  ETL_USER_TYPE(MM_SMALL,  0)
+  ETL_USER_TYPE(MM_MEDIUM, 1)
+  ETL_USER_TYPE(MM_LARGE,  2)
+  ETL_END_USER_TYPE(memory_model)
 }
 
 #endif
+

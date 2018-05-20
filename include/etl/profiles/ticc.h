@@ -28,8 +28,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ******************************************************************************/
 
-#ifndef __ETL_TICC__
-#define __ETL_TICC__
+#ifndef ETL_TICC_INCLUDED
+#define ETL_TICC_INCLUDED
 
 //*****************************************************************************
 // Texas Instruments Code Composer
@@ -46,6 +46,5 @@ SOFTWARE.
 #define ETL_NO_NULLPTR_SUPPORT    1
 #define ETL_NO_LARGE_CHAR_SUPPORT 1
 #define ETL_CPP11_TYPE_TRAITS_IS_TRIVIAL_SUPPORTED 0
-#define ETL_ATOMIC_SUPPORTED 0
 
 #endif
