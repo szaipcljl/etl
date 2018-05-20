@@ -161,7 +161,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../unittest-cpp/UnitTest++/;../../include/etl;../../include/etl/c;../../test</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../unittest-cpp/UnitTest++/;../../include/etl;../../include/etl/c;../../test</AdditionalIncludeDirectories>
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
       <MultiProcessorCompilation>false</MultiProcessorCompilation>
@@ -203,7 +203,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../unittest-cpp/UnitTest++/;../../include/etl;../../include/etl/c;../../test</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../unittest-cpp\UnitTest++;../../include/etl;../../include/etl/c;../../test</AdditionalIncludeDirectories>
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
       <MultiProcessorCompilation>false</MultiProcessorCompilation>
@@ -245,7 +245,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../unittest-cpp/UnitTest++/;../../include/etl;../../include/etl/c;../../test</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../unittest-cpp/UnitTest++/;../../include/etl;../../include/etl/c;../../test</AdditionalIncludeDirectories>
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
     </ClCompile>
@@ -511,6 +511,27 @@
     <ClInclude Include="..\murmurhash3.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\unittest-cpp\UnitTest++\AssertException.cpp" />
+    <ClCompile Include="..\..\..\unittest-cpp\UnitTest++\Checks.cpp" />
+    <ClCompile Include="..\..\..\unittest-cpp\UnitTest++\CompositeTestReporter.cpp" />
+    <ClCompile Include="..\..\..\unittest-cpp\UnitTest++\CurrentTest.cpp" />
+    <ClCompile Include="..\..\..\unittest-cpp\UnitTest++\DeferredTestReporter.cpp" />
+    <ClCompile Include="..\..\..\unittest-cpp\UnitTest++\DeferredTestResult.cpp" />
+    <ClCompile Include="..\..\..\unittest-cpp\UnitTest++\MemoryOutStream.cpp" />
+    <ClCompile Include="..\..\..\unittest-cpp\UnitTest++\ReportAssert.cpp" />
+    <ClCompile Include="..\..\..\unittest-cpp\UnitTest++\RequiredCheckException.cpp" />
+    <ClCompile Include="..\..\..\unittest-cpp\UnitTest++\RequiredCheckTestReporter.cpp" />
+    <ClCompile Include="..\..\..\unittest-cpp\UnitTest++\Test.cpp" />
+    <ClCompile Include="..\..\..\unittest-cpp\UnitTest++\TestDetails.cpp" />
+    <ClCompile Include="..\..\..\unittest-cpp\UnitTest++\TestList.cpp" />
+    <ClCompile Include="..\..\..\unittest-cpp\UnitTest++\TestReporter.cpp" />
+    <ClCompile Include="..\..\..\unittest-cpp\UnitTest++\TestReporterStdout.cpp" />
+    <ClCompile Include="..\..\..\unittest-cpp\UnitTest++\TestResults.cpp" />
+    <ClCompile Include="..\..\..\unittest-cpp\UnitTest++\TestRunner.cpp" />
+    <ClCompile Include="..\..\..\unittest-cpp\UnitTest++\ThrowingTestReporter.cpp" />
+    <ClCompile Include="..\..\..\unittest-cpp\UnitTest++\TimeConstraint.cpp" />
+    <ClCompile Include="..\..\..\unittest-cpp\UnitTest++\Win32\TimeHelpers.cpp" />
+    <ClCompile Include="..\..\..\unittest-cpp\UnitTest++\XmlTestReporter.cpp" />
     <ClCompile Include="..\..\src\binary.cpp" />
     <ClCompile Include="..\..\src\crc16.cpp" />
     <ClCompile Include="..\..\src\crc16_ccitt.cpp" />
@@ -524,24 +545,6 @@
     <ClCompile Include="..\..\src\pearson.cpp" />
     <ClCompile Include="..\..\src\private\pvoidvector.cpp" />
     <ClCompile Include="..\..\src\random.cpp" />
-    <ClCompile Include="..\..\unittest-cpp\UnitTest++\AssertException.cpp" />
-    <ClCompile Include="..\..\unittest-cpp\UnitTest++\Checks.cpp" />
-    <ClCompile Include="..\..\unittest-cpp\UnitTest++\CompositeTestReporter.cpp" />
-    <ClCompile Include="..\..\unittest-cpp\UnitTest++\CurrentTest.cpp" />
-    <ClCompile Include="..\..\unittest-cpp\UnitTest++\DeferredTestReporter.cpp" />
-    <ClCompile Include="..\..\unittest-cpp\UnitTest++\DeferredTestResult.cpp" />
-    <ClCompile Include="..\..\unittest-cpp\UnitTest++\MemoryOutStream.cpp" />
-    <ClCompile Include="..\..\unittest-cpp\UnitTest++\ReportAssert.cpp" />
-    <ClCompile Include="..\..\unittest-cpp\UnitTest++\Test.cpp" />
-    <ClCompile Include="..\..\unittest-cpp\UnitTest++\TestDetails.cpp" />
-    <ClCompile Include="..\..\unittest-cpp\UnitTest++\TestList.cpp" />
-    <ClCompile Include="..\..\unittest-cpp\UnitTest++\TestReporter.cpp" />
-    <ClCompile Include="..\..\unittest-cpp\UnitTest++\TestReporterStdout.cpp" />
-    <ClCompile Include="..\..\unittest-cpp\UnitTest++\TestResults.cpp" />
-    <ClCompile Include="..\..\unittest-cpp\UnitTest++\TestRunner.cpp" />
-    <ClCompile Include="..\..\unittest-cpp\UnitTest++\TimeConstraint.cpp" />
-    <ClCompile Include="..\..\unittest-cpp\UnitTest++\Win32\TimeHelpers.cpp" />
-    <ClCompile Include="..\..\unittest-cpp\UnitTest++\XmlTestReporter.cpp" />
     <ClCompile Include="..\main.cpp" />
     <ClCompile Include="..\murmurhash3.cpp" />
     <ClCompile Include="..\test_algorithm.cpp" />
