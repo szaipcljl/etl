@@ -360,8 +360,6 @@ namespace etl
         pool_is_shared(pool_is_shared_)
     {
       join(terminal_node, terminal_node);
-      node_t* p_first = terminal_node.next;
-      node_t* p_last  = &terminal_node;
     }
 
     //*************************************************************************
@@ -373,8 +371,6 @@ namespace etl
         pool_is_shared(pool_is_shared_)
     {
       join(terminal_node, terminal_node);
-      node_t* p_first = terminal_node.next;
-      node_t* p_last  = &terminal_node;
     }
 
     //*************************************************************************
@@ -868,7 +864,7 @@ namespace etl
 
       data_node_t* p_data_node = p_node_pool->allocate<data_node_t>();
       ::new (&(p_data_node->value)) T(value1);
-      ETL_INCREMENT_DEBUG_COUNT;
+      ETL_INCREMENT_DEBUG_COUNT
       insert_node(get_head(), *p_data_node);
     }
 
@@ -885,7 +881,7 @@ namespace etl
 
       data_node_t* p_data_node = p_node_pool->allocate<data_node_t>();
       ::new (&(p_data_node->value)) T(value1, value2);
-      ETL_INCREMENT_DEBUG_COUNT;
+      ETL_INCREMENT_DEBUG_COUNT
       insert_node(get_head(), *p_data_node);
     }
 
@@ -902,7 +898,7 @@ namespace etl
 
       data_node_t* p_data_node = p_node_pool->allocate<data_node_t>();
       ::new (&(p_data_node->value)) T(value1, value2, value3);
-      ETL_INCREMENT_DEBUG_COUNT;
+      ETL_INCREMENT_DEBUG_COUNT
       insert_node(get_head(), *p_data_node);
     }
 
@@ -919,7 +915,7 @@ namespace etl
 
       data_node_t* p_data_node = p_node_pool->allocate<data_node_t>();
       ::new (&(p_data_node->value)) T(value1, value2, value3, value4);
-      ETL_INCREMENT_DEBUG_COUNT;
+      ETL_INCREMENT_DEBUG_COUNT
       insert_node(get_head(), *p_data_node);
     }
 
@@ -967,7 +963,7 @@ namespace etl
 
       data_node_t* p_data_node = p_node_pool->allocate<data_node_t>();
       ::new (&(p_data_node->value)) T(value1);
-      ETL_INCREMENT_DEBUG_COUNT;
+      ETL_INCREMENT_DEBUG_COUNT
       insert_node(terminal_node, *p_data_node);
     }
 
@@ -984,7 +980,7 @@ namespace etl
 
       data_node_t* p_data_node = p_node_pool->allocate<data_node_t>();
       ::new (&(p_data_node->value)) T(value1, value2);
-      ETL_INCREMENT_DEBUG_COUNT;
+      ETL_INCREMENT_DEBUG_COUNT
       insert_node(terminal_node, *p_data_node);
     }
 
@@ -1001,7 +997,7 @@ namespace etl
 
       data_node_t* p_data_node = p_node_pool->allocate<data_node_t>();
       ::new (&(p_data_node->value)) T(value1, value2, value3);
-      ETL_INCREMENT_DEBUG_COUNT;
+      ETL_INCREMENT_DEBUG_COUNT
       insert_node(terminal_node, *p_data_node);
     }
 
@@ -1018,7 +1014,7 @@ namespace etl
 
       data_node_t* p_data_node = p_node_pool->allocate<data_node_t>();
       ::new (&(p_data_node->value)) T(value1, value2, value3, value4);
-      ETL_INCREMENT_DEBUG_COUNT;
+      ETL_INCREMENT_DEBUG_COUNT
       insert_node(terminal_node, *p_data_node);
     }
 
@@ -1058,7 +1054,7 @@ namespace etl
 
       data_node_t* p_data_node = p_node_pool->allocate<data_node_t>();
       ::new (&(p_data_node->value)) T(value1);
-      ETL_INCREMENT_DEBUG_COUNT;
+      ETL_INCREMENT_DEBUG_COUNT
       insert_node(*position.p_node, *p_data_node);
 
       return iterator(*p_data_node);
@@ -1075,7 +1071,7 @@ namespace etl
 
       data_node_t* p_data_node = p_node_pool->allocate<data_node_t>();
       ::new (&(p_data_node->value)) T(value1, value2);
-      ETL_INCREMENT_DEBUG_COUNT;
+      ETL_INCREMENT_DEBUG_COUNT
       insert_node(*position.p_node, *p_data_node);
 
       return iterator(*p_data_node);
@@ -1092,7 +1088,7 @@ namespace etl
 
       data_node_t* p_data_node = p_node_pool->allocate<data_node_t>();
       ::new (&(p_data_node->value)) T(value1, value2, value3);
-      ETL_INCREMENT_DEBUG_COUNT;
+      ETL_INCREMENT_DEBUG_COUNT
       insert_node(*position.p_node, *p_data_node);
 
       return iterator(*p_data_node);
@@ -1109,7 +1105,7 @@ namespace etl
 
       data_node_t* p_data_node = p_node_pool->allocate<data_node_t>();
       ::new (&(p_data_node->value)) T(value1, value2, value3, value4);
-      ETL_INCREMENT_DEBUG_COUNT;
+      ETL_INCREMENT_DEBUG_COUNT
       insert_node(*position.p_node, *p_data_node);
 
       return iterator(*p_data_node);
@@ -1660,7 +1656,7 @@ namespace etl
 
       data_node_t* p_data_node = p_node_pool->allocate<data_node_t>();
       ::new (&(p_data_node->value)) T(value);
-      ETL_INCREMENT_DEBUG_COUNT;
+      ETL_INCREMENT_DEBUG_COUNT
 
       return *p_data_node;
     }
@@ -1673,7 +1669,7 @@ namespace etl
       ETL_ASSERT(p_node_pool != nullptr, ETL_ERROR(list_no_pool));
       node.value.~T();
       p_node_pool->release(&node);
-      ETL_DECREMENT_DEBUG_COUNT;
+      ETL_DECREMENT_DEBUG_COUNT
     }
 
     // Disable copy construction.
