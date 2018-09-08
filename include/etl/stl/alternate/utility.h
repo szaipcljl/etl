@@ -32,16 +32,20 @@ SOFTWARE.
 #define ETL_STL_ALTERNATE_UTILITY_INCLUDED
 
 #include "../../platform.h"
-#include "algorithm.h"
 
 #if defined(ETL_IN_UNIT_TEST)
-#define ETLSTD etlstd
-namespace etlstd
+  #if !defined(ETLSTD)
+    #define ETLSTD etlstd
+  #endif
+  namespace etlstd
 #else
-#define ETLSTD std
-namespace std
+  #if !defined(ETLSTD)
+    #define ETLSTD std
+  #endif
+  namespace std
 #endif
 {
+#if !defined(ETL_COMPILER_ARM6)
   //******************************************************************************
   template <typename T1, typename T2>
   struct pair 
@@ -79,11 +83,15 @@ namespace std
 
     void swap(pair<T1, T2>& other)
     {
-      ETLSTD::swap(first,  other.first);
-      ETLSTD::swap(second, other.second);
+      T1 temp1 = first;
+      T2 temp2 = second;
+      first  = other.first;
+      second = other.second;
+      other.first  = temp1;
+      other.second = temp2;
     }
   };
-
+#endif
   //******************************************************************************
   template <typename T1, typename T2>
   inline pair<T1, T2> make_pair(T1 a, T2 b)
@@ -91,6 +99,7 @@ namespace std
     return pair<T1, T2>(a, b);
   }
 
+#if !defined(ETL_COMPILER_ARM6)   
   //******************************************************************************
   template <typename T1, typename T2>
   inline void swap(pair<T1, T2>& a, pair<T1, T2>& b)
@@ -100,7 +109,7 @@ namespace std
 
   //******************************************************************************
   template <typename T1, typename T2>
-  inline bool operator ==(const pair<T1, T2>& a, const pair<T1, T2>& b)
+    inline bool operator ==(const pair<T1, T2>& a, const pair<T1, T2>& b)
   {
     return (a.first == b.first) && (a.second == b.second);
   }
@@ -135,6 +144,7 @@ namespace std
   {
     return !(a < b);
   }
+#endif
 }
 
 #endif

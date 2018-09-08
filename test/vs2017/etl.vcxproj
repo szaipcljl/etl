@@ -360,6 +360,7 @@
     <ClInclude Include="..\..\include\etl\atomic.h" />
     <ClInclude Include="..\..\include\etl\atomic\atomic_arm.h" />
     <ClInclude Include="..\..\include\etl\atomic\atomic_gcc_sync.h" />
+    <ClInclude Include="..\..\include\etl\atomic\atomic_llvm_sync.h" />
     <ClInclude Include="..\..\include\etl\atomic\atomic_std.h" />
     <ClInclude Include="..\..\include\etl\callback_timer.h" />
     <ClInclude Include="..\..\include\etl\combinations.h" />
@@ -370,6 +371,7 @@
     <ClInclude Include="..\..\include\etl\fsm.h" />
     <ClInclude Include="..\..\include\etl\fsm_generator.h" />
     <ClInclude Include="..\..\include\etl\largest_generator.h" />
+    <ClInclude Include="..\..\include\etl\state_chart.h" />
     <ClInclude Include="..\..\include\etl\math_constants.h" />
     <ClInclude Include="..\..\include\etl\memory_model.h" />
     <ClInclude Include="..\..\include\etl\message.h" />
@@ -525,6 +527,7 @@
     <ClInclude Include="..\ecl_user.h" />
     <ClInclude Include="..\etl_profile.h" />
     <ClInclude Include="..\murmurhash3.h" />
+    <ClInclude Include="..\no_stl_test_iterators.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\unittest-cpp\UnitTest++\AssertException.cpp" />
@@ -565,6 +568,7 @@
     <ClCompile Include="..\murmurhash3.cpp" />
     <ClCompile Include="..\test_algorithm.cpp" />
     <ClCompile Include="..\test_alignment.cpp" />
+    <ClCompile Include="..\test_forward_list_shared_pool.cpp" />
     <ClCompile Include="..\test_list_shared_pool.cpp" />
     <ClCompile Include="..\test_no_stl_algorithm.cpp" />
     <ClCompile Include="..\test_array.cpp">
@@ -688,6 +692,7 @@
     <ClCompile Include="..\test_multiset.cpp" />
     <ClCompile Include="..\test_murmur3.cpp" />
     <ClCompile Include="..\test_no_stl_functional.cpp" />
+    <ClCompile Include="..\test_no_stl_iterator.cpp" />
     <ClCompile Include="..\test_no_stl_limits.cpp" />
     <ClCompile Include="..\test_no_stl_utility.cpp" />
     <ClCompile Include="..\test_numeric.cpp" />
@@ -725,6 +730,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\test_state_chart.cpp" />
     <ClCompile Include="..\test_smallest.cpp" />
     <ClCompile Include="..\test_stack.cpp" />
     <ClCompile Include="..\test_string_char.cpp" />
@@ -765,6 +771,7 @@
     <None Include="..\..\include\etl\generate_type_lookup.bat" />
     <None Include="..\..\include\etl\generate_type_traits.bat" />
     <None Include="..\..\include\etl\generate_variant_pool.bat" />
+    <None Include="cpp.hint" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\CMakeLists.txt" />

@@ -383,17 +383,25 @@ namespace etl
     }
 
     //*************************************************************************
+    /// Get the node pool instance.
+    //*************************************************************************
+    etl::ipool* get_node_pool()
+    {
+      return p_node_pool;
+    }
+
+    //*************************************************************************
     /// Destructor.
     //*************************************************************************
     ~list_base()
     {
     }
 
-    etl::ipool* p_node_pool;     ///< The pool of data nodes used in the list.
-    node_t      terminal_node;   ///< The node that acts as the list start and end.
-    size_type   MAX_SIZE;        ///< The maximum size of the list.
+    etl::ipool* p_node_pool;    ///< The pool of data nodes used in the list.
+    node_t      terminal_node;  ///< The node that acts as the list start and end.
+    size_type   MAX_SIZE;       ///< The maximum size of the list.
     bool        pool_is_shared; ///< If <b>true</b> then the pool is shared between lists.
-    ETL_DECLARE_DEBUG_COUNT;     ///< Internal debugging.
+    ETL_DECLARE_DEBUG_COUNT    ///< Internal debugging.
   };
 
   //***************************************************************************
@@ -1905,6 +1913,12 @@ namespace etl
     //*************************************************************************
     void set_pool(etl::ipool& pool)
     {
+      // Clear the list of any current elements.
+      if (this->get_node_pool() != nullptr)
+      {
+        this->clear();
+      }
+
       this->set_node_pool(pool);
     }
   };
@@ -1988,7 +2002,6 @@ bool operator >=(const etl::ilist<T>& lhs, const etl::ilist<T>& rhs)
 {
   return !(lhs < rhs);
 }
-
 
 #include "private/minmax_pop.h"
 

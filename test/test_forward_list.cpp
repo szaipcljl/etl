@@ -185,7 +185,7 @@ namespace
     TEST_FIXTURE(SetupFixture, test_const_iterator)
     {
       CompareDataNDC compare_data(sorted_data.begin(), sorted_data.end());
-      DataNDC data(compare_data.begin(), compare_data.end());
+      const DataNDC data(compare_data.begin(), compare_data.end());
 
       are_equal = std::equal(data.cbegin(), data.cend(), compare_data.cbegin());
 
