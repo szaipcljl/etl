@@ -29,11 +29,11 @@ SOFTWARE.
 #include "UnitTest++.h"
 #include "ExtraCheckMacros.h"
 
-#include "data.h"
-
-#include "etl/pool.h"
-#include "etl/container.h"
 #include "etl/list.h"
+#include "etl/pool.h"
+
+#include "data.h"
+#include "etl/container.h"
 
 #include <algorithm>
 #include <array>
