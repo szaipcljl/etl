@@ -59,6 +59,8 @@ namespace
     typedef std::forward_list<ItemNDC> CompareDataNDC;
     typedef std::vector<ItemNDC> InitialDataNDC;
 
+    typedef etl::pool<DataInt::pool_type, SIZE * 2> PoolInt2;
+
     typedef etl::pool<DataDC::pool_type, SIZE> PoolDC;
     typedef etl::pool<DataDC::pool_type, SIZE * 2> PoolDC2;
     typedef etl::pool<DataDC::pool_type, SIZE * 4> PoolDC4;
@@ -288,100 +290,167 @@ namespace
       CHECK(are_equal);
     }
 
-    ////*************************************************************************
-    //TEST_FIXTURE(SetupFixture, test_resize_up_value)
-    //{
-    //  const size_t INITIAL_SIZE = 4;
-    //  const size_t NEW_SIZE     = 8;
-    //  const ItemNDC VALUE("1");
+    //*************************************************************************
+    TEST_FIXTURE(SetupFixture, test_resize_up_value)
+    {
+      PoolNDC2 pool;
 
-    //  DataNDC data(INITIAL_SIZE, VALUE);
-    //  data.resize(NEW_SIZE, VALUE);
+      const size_t INITIAL_SIZE = 4;
+      const size_t NEW_SIZE     = 8;
+      const ItemNDC VALUE1("1");
+      const ItemNDC VALUE2("2");
 
-    //  CompareDataNDC compare_data(INITIAL_SIZE, VALUE);
-    //  compare_data.resize(NEW_SIZE, VALUE);
+      DataNDC data1(INITIAL_SIZE, VALUE1, pool);
+      data1.resize(NEW_SIZE, VALUE1);
 
-    //  CHECK_EQUAL(size_t(std::distance(compare_data.begin(), compare_data.end())), data.size());
+      DataNDC data2(INITIAL_SIZE, VALUE2, pool);
+      data2.resize(NEW_SIZE, VALUE2);
 
-    //  are_equal = std::equal(data.begin(), data.end(), compare_data.begin());
-    //  CHECK(are_equal);
-    //}
+      CompareDataNDC compare_data1(INITIAL_SIZE, VALUE1);
+      compare_data1.resize(NEW_SIZE, VALUE1);
 
-    ////*************************************************************************
-    //TEST_FIXTURE(SetupFixture, test_resize_excess)
-    //{
-    //  const size_t INITIAL_SIZE = 4;
-    //  DataDC data(INITIAL_SIZE);
+      CompareDataNDC compare_data2(INITIAL_SIZE, VALUE2);
+      compare_data2.resize(NEW_SIZE, VALUE2);
+      
+      CHECK_EQUAL(size_t(std::distance(compare_data1.begin(), compare_data1.end())), data1.size());
+      CHECK_EQUAL(size_t(std::distance(compare_data2.begin(), compare_data2.end())), data2.size());
 
-    //  CHECK_THROW(data.resize(data.max_size() + 1), etl::forward_list_full);
-    //}
+      are_equal = std::equal(data1.begin(), data1.end(), compare_data1.begin());
+      CHECK(are_equal);
 
-    ////*************************************************************************
-    //TEST_FIXTURE(SetupFixture, test_resize_down)
-    //{
-    //  const size_t INITIAL_SIZE = 4;
-    //  const size_t NEW_SIZE = 2;
-    //  const ItemDC VALUE("1");
+      are_equal = std::equal(data2.begin(), data2.end(), compare_data2.begin());
+      CHECK(are_equal);
+    }
 
-    //  DataDC data(INITIAL_SIZE, VALUE);
-    //  data.resize(NEW_SIZE);
+    //*************************************************************************
+    TEST_FIXTURE(SetupFixture, test_resize_excess)
+    {
+      PoolNDC2 pool;
 
-    //  CompareDataDC compare_data(INITIAL_SIZE, VALUE);
-    //  compare_data.resize(NEW_SIZE);
+      const size_t INITIAL_SIZE = 4;
+      DataDC data1(INITIAL_SIZE, pool);
+      DataDC data2(INITIAL_SIZE, pool);
 
-    //  CHECK_EQUAL(size_t(std::distance(compare_data.begin(), compare_data.end())), data.size());
+      CHECK_THROW(data1.resize(data1.max_size() + 1), etl::forward_list_full);
+      CHECK_THROW(data2.resize(data2.max_size() + 1), etl::forward_list_full);
+    }
 
-    //  are_equal = std::equal(data.begin(), data.end(), compare_data.begin());
-    //  CHECK(are_equal);
-    //}
+    //*************************************************************************
+    TEST_FIXTURE(SetupFixture, test_resize_down)
+    {
+      PoolNDC2 pool;
 
-    ////*************************************************************************
-    //TEST_FIXTURE(SetupFixture, test_resize_down_value)
-    //{
-    //  const size_t INITIAL_SIZE = 4;
-    //  const size_t NEW_SIZE = 2;
-    //  const ItemNDC VALUE("1");
+      const size_t INITIAL_SIZE = 4;
+      const size_t NEW_SIZE = 2;
+      const ItemDC VALUE1("1");
+      const ItemDC VALUE2("2");
 
-    //  DataNDC data(INITIAL_SIZE, VALUE);
-    //  data.resize(NEW_SIZE, VALUE);
+      DataDC data1(INITIAL_SIZE, VALUE1, pool);
+      data1.resize(NEW_SIZE);
 
-    //  CompareDataNDC compare_data(INITIAL_SIZE, VALUE);
-    //  compare_data.resize(NEW_SIZE, VALUE);
+      DataDC data2(INITIAL_SIZE, VALUE2, pool);
+      data2.resize(NEW_SIZE);
+      
+      CompareDataDC compare_data1(INITIAL_SIZE, VALUE1);
+      compare_data1.resize(NEW_SIZE, VALUE1);
 
-    //  CHECK_EQUAL(size_t(std::distance(compare_data.begin(), compare_data.end())), data.size());
+      CompareDataDC compare_data2(INITIAL_SIZE, VALUE2);
+      compare_data2.resize(NEW_SIZE, VALUE2);
 
-    //  are_equal = std::equal(data.begin(), data.end(), compare_data.begin());
-    //  CHECK(are_equal);
-    //}
+      CHECK_EQUAL(size_t(std::distance(compare_data1.begin(), compare_data1.end())), data1.size());
+      CHECK_EQUAL(size_t(std::distance(compare_data2.begin(), compare_data2.end())), data2.size());
 
-    ////*************************************************************************
-    //TEST_FIXTURE(SetupFixture, test_clear)
-    //{
-    //  DataNDC data(sorted_data.begin(), sorted_data.end());
-    //  data.clear();
-    //  CHECK(data.empty());
+      are_equal = std::equal(data1.begin(), data1.end(), compare_data1.begin());
+      CHECK(are_equal);
 
-    //  // Do it again to check that clear() didn't screw up the internals.
-    //  data.assign(sorted_data.begin(), sorted_data.end());
-    //  CHECK_EQUAL(SIZE, data.size());
-    //  data.clear();
-    //  CHECK_EQUAL(size_t(0), data.size());
-    //}
+      are_equal = std::equal(data2.begin(), data2.end(), compare_data2.begin());
+      CHECK(are_equal);
+    }
 
-    ////*************************************************************************
-    //TEST_FIXTURE(SetupFixture, test_clear_pod)
-    //{
-    //  DataInt data(SIZE, 1);
+    //*************************************************************************
+    TEST_FIXTURE(SetupFixture, test_resize_down_value)
+    {
+      PoolNDC2 pool;
+      const size_t INITIAL_SIZE = 4;
+      const size_t NEW_SIZE = 2;
+      const ItemNDC VALUE1("1");
+      const ItemNDC VALUE2("2");
 
-    //  data.clear();
-    //  CHECK(data.empty());
+      DataNDC data1(INITIAL_SIZE, VALUE1, pool);
+      data1.resize(NEW_SIZE, VALUE1);
 
-    //  // Do it again to check that clear() didn't screw up the internals.
-    //  data.resize(SIZE);
-    //  CHECK_EQUAL(SIZE, data.size());
-    //  data.clear();
-    //  CHECK_EQUAL(size_t(0), data.size());
-    //}
+      DataNDC data2(INITIAL_SIZE, VALUE2, pool);
+      data2.resize(NEW_SIZE, VALUE2);
+
+      CompareDataNDC compare_data1(INITIAL_SIZE, VALUE1);
+      compare_data1.resize(NEW_SIZE, VALUE1);
+
+      CompareDataNDC compare_data2(INITIAL_SIZE, VALUE2);
+      compare_data2.resize(NEW_SIZE, VALUE2);
+
+      CHECK_EQUAL(size_t(std::distance(compare_data1.begin(), compare_data1.end())), data1.size());
+      CHECK_EQUAL(size_t(std::distance(compare_data2.begin(), compare_data2.end())), data2.size());
+
+      are_equal = std::equal(data1.begin(), data1.end(), compare_data1.begin());
+      CHECK(are_equal);
+
+      are_equal = std::equal(data2.begin(), data2.end(), compare_data2.begin());
+      CHECK(are_equal);
+    }
+
+    //*************************************************************************
+    TEST_FIXTURE(SetupFixture, test_clear)
+    {
+      PoolNDC2 pool;
+
+      DataNDC data1(sorted_data.begin(), sorted_data.end(), pool);
+      DataNDC data2(sorted_data.begin(), sorted_data.end(), pool);
+
+      data1.clear();
+      CHECK(data1.empty());
+      CHECK(!data2.empty());
+
+      data2.clear();
+      CHECK(data1.empty());
+      CHECK(data2.empty());
+      
+      // Do it again to check that clear() didn't screw up the internals.
+      data1.assign(sorted_data.begin(), sorted_data.end());
+      CHECK_EQUAL(sorted_data.size(), data1.size());
+      data2.assign(sorted_data.begin(), sorted_data.end());
+      CHECK_EQUAL(sorted_data.size(), data2.size());
+      data1.clear();
+      CHECK_EQUAL(size_t(0), data1.size());
+      data2.clear();
+      CHECK_EQUAL(size_t(0), data2.size());
+    }
+
+    //*************************************************************************
+    TEST_FIXTURE(SetupFixture, test_clear_pod)
+    {
+      PoolInt2 pool;
+      DataInt data1(SIZE, 1, pool);
+      DataInt data2(SIZE, 2, pool);
+
+      data1.clear();
+      CHECK(data1.empty());
+      CHECK(!data2.empty());
+
+      data2.clear();
+      CHECK(data1.empty());
+      CHECK(data2.empty());
+      
+      // Do it again to check that clear() didn't screw up the internals.
+      data1.resize(SIZE);
+      CHECK_EQUAL(SIZE, data1.size());
+      data1.clear();
+      CHECK_EQUAL(size_t(0), data1.size());
+
+      data2.resize(SIZE);
+      CHECK_EQUAL(SIZE, data2.size());
+      data2.clear();
+      CHECK_EQUAL(size_t(0), data2.size());
+    }
 
     ////*************************************************************************
     //TEST_FIXTURE(SetupFixture, test_assign_range)
