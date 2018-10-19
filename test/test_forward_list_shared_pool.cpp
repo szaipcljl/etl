@@ -1042,123 +1042,169 @@ namespace
       CHECK(are_equal);
     }
 
-    ////*************************************************************************
-    //TEST_FIXTURE(SetupFixture, test_erase_after_range)
-    //{
-    //  CompareDataNDC compare_data(sorted_data.begin(), sorted_data.end());
-    //  DataNDC data(sorted_data.begin(), sorted_data.end());
+    //*************************************************************************
+    TEST_FIXTURE(SetupFixture, test_erase_after_range)
+    {
+      CompareDataNDC compare_data(sorted_data.begin(), sorted_data.end());
+      PoolNDC2 pool;
+      DataNDC data1(sorted_data.begin(), sorted_data.end(), pool);
+      DataNDC data2(sorted_data.begin(), sorted_data.end(), pool);
 
-    //  DataNDC::iterator i_data_1 = data.begin();
-    //  std::advance(i_data_1, 2);
+      DataNDC::iterator i_data1_1 = data1.begin();
+      std::advance(i_data1_1, 2);
 
-    //  DataNDC::iterator i_data_2 = data.begin();
-    //  std::advance(i_data_2, 4);
+      DataNDC::iterator i_data1_2 = data1.begin();
+      std::advance(i_data1_2, 4);
 
-    //  CompareDataNDC::iterator i_compare_data_1 = compare_data.begin();
-    //  std::advance(i_compare_data_1, 2);
+      DataNDC::iterator i_data2_1 = data2.begin();
+      std::advance(i_data2_1, 2);
 
-    //  CompareDataNDC::iterator i_compare_data_2 = compare_data.begin();
-    //  std::advance(i_compare_data_2, 4);
+      DataNDC::iterator i_data2_2 = data2.begin();
+      std::advance(i_data2_2, 4);
 
-    //  CompareDataNDC::iterator i_compare_result = compare_data.erase_after(i_compare_data_1, i_compare_data_2);
+      CompareDataNDC::iterator i_compare_data_1 = compare_data.begin();
+      std::advance(i_compare_data_1, 2);
 
-    //  DataNDC::iterator i_result = data.erase_after(i_data_1, i_data_2);
+      CompareDataNDC::iterator i_compare_data_2 = compare_data.begin();
+      std::advance(i_compare_data_2, 4);
 
-    //  CHECK_EQUAL(*i_compare_result, *i_result);
+      CompareDataNDC::iterator i_compare_result = compare_data.erase_after(i_compare_data_1, i_compare_data_2);
 
-    //  CHECK_EQUAL(size_t(std::distance(compare_data.begin(), compare_data.end())), data.size());
+      DataNDC::iterator i_result1 = data1.erase_after(i_data1_1, i_data1_2);
+      DataNDC::iterator i_result2 = data2.erase_after(i_data2_1, i_data2_2);
 
-    //  are_equal = std::equal(data.begin(), data.end(), compare_data.begin());
-    //  CHECK(are_equal);
-    //}
+      CHECK_EQUAL(*i_compare_result, *i_result1);
+      CHECK_EQUAL(*i_compare_result, *i_result2);
 
-    ////*************************************************************************
-    //TEST_FIXTURE(SetupFixture, test_erase_after_range_end)
-    //{
-    //  CompareDataNDC compare_data(sorted_data.begin(), sorted_data.end());
-    //  DataNDC data(sorted_data.begin(), sorted_data.end());
+      CHECK_EQUAL(size_t(std::distance(compare_data.begin(), compare_data.end())), data1.size());
+      CHECK_EQUAL(size_t(std::distance(compare_data.begin(), compare_data.end())), data2.size());
 
-    //  DataNDC::iterator i_data = data.begin();
-    //  std::advance(i_data, 4);
+      are_equal = std::equal(data1.begin(), data1.end(), compare_data.begin());
+      CHECK(are_equal);
 
-    //  CompareDataNDC::iterator i_compare_data = compare_data.begin();
-    //  std::advance(i_compare_data, 4);
+      are_equal = std::equal(data2.begin(), data2.end(), compare_data.begin());
+      CHECK(are_equal);
+    }
 
-    //  compare_data.erase_after(i_compare_data, compare_data.end());
+    //*************************************************************************
+    TEST_FIXTURE(SetupFixture, test_erase_after_range_end)
+    {
+      CompareDataNDC compare_data(sorted_data.begin(), sorted_data.end());
+      PoolNDC2 pool;
+      DataNDC data1(sorted_data.begin(), sorted_data.end(), pool);
+      DataNDC data2(sorted_data.begin(), sorted_data.end(), pool);
 
-    //  DataNDC::iterator i_result = data.erase_after(i_data, data.end());
+      DataNDC::iterator i_data1 = data1.begin();
+      std::advance(i_data1, 4);
 
-    //  CHECK(i_result == data.end());
+      DataNDC::iterator i_data2 = data2.begin();
+      std::advance(i_data2, 4);
 
-    //  CHECK_EQUAL(size_t(std::distance(compare_data.begin(), compare_data.end())), data.size());
+      CompareDataNDC::iterator i_compare_data = compare_data.begin();
+      std::advance(i_compare_data, 4);
 
-    //  are_equal = std::equal(data.begin(), data.end(), compare_data.begin());
-    //  CHECK(are_equal);
-    //}
+      compare_data.erase_after(i_compare_data, compare_data.end());
 
-    ////*************************************************************************
-    //TEST_FIXTURE(SetupFixture, test_erase_after_all)
-    //{
-    //  DataNDC data(sorted_data.begin(), sorted_data.end());
+      DataNDC::iterator i_result1 = data1.erase_after(i_data1, data1.end());
+      DataNDC::iterator i_result2 = data2.erase_after(i_data2, data2.end());
 
-    //  data.erase_after(data.before_begin(), data.end());
+      CHECK(i_result1 == data1.end());
+      CHECK(i_result2 == data2.end());
 
-    //  CHECK(data.empty());
-    //}
+      CHECK_EQUAL(size_t(std::distance(compare_data.begin(), compare_data.end())), data1.size());
+      CHECK_EQUAL(size_t(std::distance(compare_data.begin(), compare_data.end())), data2.size());
 
-    ////*************************************************************************
-    //TEST_FIXTURE(SetupFixture, test_front)
-    //{
-    //  CompareDataNDC compare_data(sorted_data.begin(), sorted_data.end());
-    //  DataNDC data(sorted_data.begin(), sorted_data.end());
+      are_equal = std::equal(data1.begin(), data1.end(), compare_data.begin());
+      CHECK(are_equal);
 
-    //  CHECK_EQUAL(compare_data.front(), data.front());
-    //}
+      are_equal = std::equal(data2.begin(), data2.end(), compare_data.begin());
+      CHECK(are_equal);
+    }
 
-    ////*************************************************************************
-    //TEST_FIXTURE(SetupFixture, test_assignment)
-    //{
-    //  CompareDataNDC compare_data(sorted_data.begin(), sorted_data.end());
-    //  DataNDC data(sorted_data.begin(), sorted_data.end());
-    //  DataNDC other_data;
+    //*************************************************************************
+    TEST_FIXTURE(SetupFixture, test_erase_after_all)
+    {
+      PoolNDC2 pool;
+      DataNDC data1(sorted_data.begin(), sorted_data.end(), pool);
+      DataNDC data2(sorted_data.begin(), sorted_data.end(), pool);
 
-    //  other_data = data;
+      data1.erase_after(data1.before_begin(), data1.end());
 
-    //  CHECK_EQUAL(data.size(), other_data.size());
+      CHECK(data1.empty());
+      CHECK(!data2.empty());
 
-    //  are_equal = std::equal(data.begin(), data.end(), other_data.begin());
-    //  CHECK(are_equal);
-    //}
+      data2.erase_after(data2.before_begin(), data2.end());
 
-    ////*************************************************************************
-    //TEST_FIXTURE(SetupFixture, test_assignment_interface)
-    //{
-    //  DataNDC data1(sorted_data.begin(), sorted_data.end());
-    //  DataNDC data2;
+      CHECK(data1.empty());
+      CHECK(data2.empty());
+    }
 
-    //  IDataNDC& idata1 = data1;
-    //  IDataNDC& idata2 = data2;
+    //*************************************************************************
+    TEST_FIXTURE(SetupFixture, test_front)
+    {
+      CompareDataNDC compare_data(sorted_data.begin(), sorted_data.end());
+      PoolNDC2 pool;
+      DataNDC data1(sorted_data.begin(), sorted_data.end(), pool);
+      DataNDC data2(sorted_data.begin(), sorted_data.end(), pool);
 
-    //  idata2 = idata1;
+      CHECK_EQUAL(compare_data.front(), data1.front());
+      CHECK_EQUAL(compare_data.front(), data2.front());
+    }
 
-    //  bool isEqual = std::equal(data1.begin(), data1.end(), data2.begin());
-    //  CHECK(isEqual);
-    //}
+    //*************************************************************************
+    TEST_FIXTURE(SetupFixture, test_assignment)
+    {
+      CompareDataNDC compare_data(sorted_data.begin(), sorted_data.end());
+      PoolNDC4 pool;
+      DataNDC data1(sorted_data.begin(), sorted_data.end(), pool);
+      DataNDC data2(sorted_data.begin(), sorted_data.end(), pool);
+      DataNDC other_data1(pool);
+      DataNDC other_data2(pool);
 
-    ////*************************************************************************
-    //TEST_FIXTURE(SetupFixture, test_self_assignment)
-    //{
-    //  CompareDataNDC compare_data(sorted_data.begin(), sorted_data.end());
-    //  DataNDC data(sorted_data.begin(), sorted_data.end());
-    //  DataNDC other_data(data);
+      other_data1 = data1;
+      other_data2 = data2;
 
-    //  other_data = other_data;
+      CHECK_EQUAL(data1.size(), other_data1.size());
+      CHECK_EQUAL(data2.size(), other_data2.size());
 
-    //  CHECK_EQUAL(data.size(), other_data.size());
+      are_equal = std::equal(data1.begin(), data1.end(), other_data1.begin());
+      CHECK(are_equal);
 
-    //  are_equal = std::equal(data.begin(), data.end(), other_data.begin());
-    //  CHECK(are_equal);
-    //}
+      are_equal = std::equal(data2.begin(), data2.end(), other_data2.begin());
+      CHECK(are_equal);
+    }
+
+    //*************************************************************************
+    TEST_FIXTURE(SetupFixture, test_assignment_interface)
+    {
+      PoolNDC2 pool;
+      DataNDC data1(sorted_data.begin(), sorted_data.end(), pool);
+      DataNDC data2(pool);
+
+      IDataNDC& idata1 = data1;
+      IDataNDC& idata2 = data2;
+
+      idata2 = idata1;
+
+      bool isEqual = std::equal(data1.begin(), data1.end(), data2.begin());
+      CHECK(isEqual);
+    }
+
+    //*************************************************************************
+    TEST_FIXTURE(SetupFixture, test_self_assignment)
+    {
+      CompareDataNDC compare_data(sorted_data.begin(), sorted_data.end());
+      PoolNDC2 pool;
+      DataNDC data1(sorted_data.begin(), sorted_data.end(), pool);
+      DataNDC other_data(data1);
+
+      other_data = other_data;
+
+      CHECK_EQUAL(data1.size(), other_data.size());
+
+      are_equal = std::equal(data1.begin(), data1.end(), other_data.begin());
+      CHECK(are_equal);
+    }
 
     ////*************************************************************************
     //TEST_FIXTURE(SetupFixture, test_unique_empty)
