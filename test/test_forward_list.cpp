@@ -1110,6 +1110,7 @@ namespace
       data.move_after(i_first_before, i_last, i_to_before);
 
       are_equal = std::equal(data.begin(), data.end(), compare_data.begin());
+      CHECK(are_equal);
 
       // Move to nearby.
       i_first_before = data.begin();
@@ -1134,6 +1135,7 @@ namespace
       data.move_after(i_first_before, i_last, i_to_before);
 
       are_equal = std::equal(data.begin(), data.end(), compare_data.begin());
+      CHECK(are_equal);
 
       // Move to same.
       i_first_before = data.begin();
@@ -1158,6 +1160,7 @@ namespace
       data.move_after(i_first_before, i_last, i_to_before);
 
       are_equal = std::equal(data.begin(), data.end(), compare_data.begin());
+      CHECK(are_equal);
 
       // Move to illegal place.
       i_first_before = data.begin();
