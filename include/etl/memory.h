@@ -1119,9 +1119,38 @@ namespace etl
     ~wipe_on_destruct()
     {
       char* pobject = reinterpret_cast<char*>(static_cast<T*>(this));
-      memset(pobject, 0, sizeof(T));
+      std::fill_n(pobject, sizeof(T), 0);
     }
   };
+
+  //*****************************************************************************
+  /// A low level function that clears an object's memory to zero.
+  ///\tparam T The type.
+  ///\param  object The object to clear.
+  ///\ingroup memory
+  //*****************************************************************************
+  template <typename T>
+  void memory_clear(T &object)
+  {
+    std::fill_n(reinterpret_cast<char*>(&object), 
+                sizeof(T), 
+                0);
+  }
+
+  //*****************************************************************************
+  /// A low level function that sets an object's memory to a value.
+  ///\tparam T The type.
+  ///\param  object The object to set.
+  ///\param  value  The value to set the object with.
+  ///\ingroup memory
+  //*****************************************************************************
+  template <typename T>
+  void memory_set(T &object, int value)
+  {
+    std::fill_n(reinterpret_cast<char*>(&object), 
+                sizeof(T), 
+                static_cast<char>(value));
+  }
 }
 
 #endif
