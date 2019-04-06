@@ -97,6 +97,14 @@ namespace
 
       actual = etl::log<0, 10>::value;
       CHECK_EQUAL(0, actual);
+
+#if ETL_CPP14_SUPPORTED
+      actual = etl::log_v<0, 2>;
+      CHECK_EQUAL(0, actual);
+
+      actual = etl::log_v<0, 10>;
+      CHECK_EQUAL(0, actual);
+#endif
     }
 
     //*************************************************************************
@@ -109,6 +117,14 @@ namespace
 
       actual = etl::log<1, 10>::value;
       CHECK_EQUAL(0, actual);
+
+#if ETL_CPP14_SUPPORTED
+      actual = etl::log_v<1, 2>;
+      CHECK_EQUAL(0, actual);
+
+      actual = etl::log_v<1, 10>;
+      CHECK_EQUAL(0, actual);
+#endif
     }
 
     //*************************************************************************
@@ -121,6 +137,14 @@ namespace
 
       actual = etl::log<10, 10>::value;
       CHECK_EQUAL(1, actual);
+
+#if ETL_CPP14_SUPPORTED
+      actual = etl::log_v<10, 2>;
+      CHECK_EQUAL(3, actual);
+
+      actual = etl::log_v<10, 10>;
+      CHECK_EQUAL(1, actual);
+#endif
     }
 
     //*************************************************************************
@@ -133,6 +157,14 @@ namespace
 
       actual = etl::log<100, 10>::value;
       CHECK_EQUAL(2, actual);
+
+#if ETL_CPP14_SUPPORTED
+      actual = etl::log_v<100, 2>;
+      CHECK_EQUAL(6, actual);
+
+      actual = etl::log_v<100, 10>;
+      CHECK_EQUAL(2, actual);
+#endif
     }
 
     //*************************************************************************
@@ -151,6 +183,20 @@ namespace
 
       actual = etl::log2<100>::value;
       CHECK_EQUAL(6, actual);
+
+#if ETL_CPP14_SUPPORTED
+      actual = etl::log2_v<0>;
+      CHECK_EQUAL(0, actual);
+
+      actual = etl::log2_v<1>;
+      CHECK_EQUAL(0, actual);
+
+      actual = etl::log2_v<10>;
+      CHECK_EQUAL(3, actual);
+
+      actual = etl::log2_v<100>;
+      CHECK_EQUAL(6, actual);
+#endif
     }
 
     //*************************************************************************
@@ -172,6 +218,23 @@ namespace
 
       actual = etl::log10<200>::value;
       CHECK_EQUAL(2, actual);
+
+#if ETL_CPP14_SUPPORTED
+      actual = etl::log10_v<0>;
+      CHECK_EQUAL(0, actual);
+
+      actual = etl::log10_v<1>;
+      CHECK_EQUAL(0, actual);
+
+      actual = etl::log10_v<10>;
+      CHECK_EQUAL(1, actual);
+
+      actual = etl::log10_v<100>;
+      CHECK_EQUAL(2, actual);
+
+      actual = etl::log10_v<200>;
+      CHECK_EQUAL(2, actual);
+#endif
     }
 
     //*************************************************************************
@@ -220,12 +283,62 @@ namespace
       CHECK_EQUAL(0x8000U, actual);
 
       // 2^31
-      actual = etl::power<2, 31>::value;
+      actual = etl::power<2, 31, uint32_t>::value;
       CHECK_EQUAL(0x80000000U, actual);
 
       // 2^63
-      actual = etl::power<2, 63>::value;
+      actual = etl::power<2, 63, uint64_t>::value;
       CHECK_EQUAL(0x8000000000000000U, actual);
+
+#if ETL_CPP14_SUPPORTED
+      // 2^1
+      actual = etl::power_v<2, 1>;
+      CHECK_EQUAL(2U, actual);
+
+      // 3^2
+      actual = etl::power_v<3, 2>;
+      CHECK_EQUAL(9U, actual);
+
+      // 4^3
+      actual = etl::power_v<4, 3>;
+      CHECK_EQUAL(64U, actual);
+
+      // 5^4
+      actual = etl::power_v<5, 4>;
+      CHECK_EQUAL(625U, actual);
+
+      // 6^5
+      actual = etl::power_v<6, 5>;
+      CHECK_EQUAL(7776U, actual);
+
+      // 7^6
+      actual = etl::power_v<7, 6>;
+      CHECK_EQUAL(117649U, actual);
+
+      // 8^7
+      actual = etl::power_v<8, 7>;
+      CHECK_EQUAL(2097152U, actual);
+
+      // 9^8
+      actual = etl::power_v<9, 8>;
+      CHECK_EQUAL(43046721U, actual);
+
+      // 10^9
+      actual = etl::power_v<10, 9>;
+      CHECK_EQUAL(1000000000U, actual);
+
+      // 2^16
+      actual = etl::power_v<2, 15>;
+      CHECK_EQUAL(0x8000U, actual);
+
+      // 2^31
+      actual = etl::power_v<2, 31, uint32_t>;
+      CHECK_EQUAL(0x80000000U, actual);
+
+      // 2^63
+      actual = etl::power_v<2, 63, uint64_t>;
+      CHECK_EQUAL(0x8000000000000000U, actual);
+#endif
     }
 
     //*************************************************************************
@@ -233,7 +346,6 @@ namespace
     {
       int actual;
 
-      //
       actual = etl::power_of_2_round_up<0>::value;
       CHECK_EQUAL(2, actual);
 
@@ -260,6 +372,35 @@ namespace
 
       actual = etl::power_of_2_round_up<129>::value;
       CHECK_EQUAL(256, actual);
+
+#if ETL_CPP14_SUPPORTED
+      actual = etl::power_of_2_round_up_v<0>;
+      CHECK_EQUAL(2, actual);
+
+      actual = etl::power_of_2_round_up_v<1>;
+      CHECK_EQUAL(2, actual);
+
+      actual = etl::power_of_2_round_up_v<2>;
+      CHECK_EQUAL(2, actual);
+
+      actual = etl::power_of_2_round_up_v<3>;
+      CHECK_EQUAL(4, actual);
+
+      actual = etl::power_of_2_round_up_v<4>;
+      CHECK_EQUAL(4, actual);
+
+      actual = etl::power_of_2_round_up_v<5>;
+      CHECK_EQUAL(8, actual);
+
+      actual = etl::power_of_2_round_up_v<127>;
+      CHECK_EQUAL(128, actual);
+
+      actual = etl::power_of_2_round_up_v<128>;
+      CHECK_EQUAL(128, actual);
+
+      actual = etl::power_of_2_round_up_v<129>;
+      CHECK_EQUAL(256, actual);
+#endif
     }
 
     //*************************************************************************
@@ -293,6 +434,35 @@ namespace
 
       actual = etl::power_of_2_round_down<129>::value;
       CHECK_EQUAL(128, actual);
+
+#if ETL_CPP14_SUPPORTED
+      actual = etl::power_of_2_round_down_v<0>;
+      CHECK_EQUAL(2, actual);
+
+      actual = etl::power_of_2_round_down_v<1>;
+      CHECK_EQUAL(2, actual);
+
+      actual = etl::power_of_2_round_down_v<2>;
+      CHECK_EQUAL(2, actual);
+
+      actual = etl::power_of_2_round_down_v<3>;
+      CHECK_EQUAL(2, actual);
+
+      actual = etl::power_of_2_round_down_v<4>;
+      CHECK_EQUAL(2, actual);
+
+      actual = etl::power_of_2_round_down_v<5>;
+      CHECK_EQUAL(4, actual);
+
+      actual = etl::power_of_2_round_down_v<127>;
+      CHECK_EQUAL(64, actual);
+
+      actual = etl::power_of_2_round_down_v<128>;
+      CHECK_EQUAL(64, actual);
+
+      actual = etl::power_of_2_round_down_v<129>;
+      CHECK_EQUAL(128, actual);
+#endif
     }
 
     //*************************************************************************
@@ -326,6 +496,35 @@ namespace
 
       actual = etl::is_power_of_2<129>::value;
       CHECK_EQUAL(false, actual);
+
+#if ETL_CPP14_SUPPORTED
+      actual = etl::is_power_of_2_v<0>;
+      CHECK_EQUAL(false, actual);
+
+      actual = etl::is_power_of_2_v<1>;
+      CHECK_EQUAL(false, actual);
+
+      actual = etl::is_power_of_2_v<2>;
+      CHECK_EQUAL(true, actual);
+
+      actual = etl::is_power_of_2_v<3>;
+      CHECK_EQUAL(false, actual);
+
+      actual = etl::is_power_of_2_v<4>;
+      CHECK_EQUAL(true, actual);
+
+      actual = etl::is_power_of_2_v<5>;
+      CHECK_EQUAL(false, actual);
+
+      actual = etl::is_power_of_2_v<127>;
+      CHECK_EQUAL(false, actual);
+
+      actual = etl::is_power_of_2_v<128>;
+      CHECK_EQUAL(true, actual);
+
+      actual = etl::is_power_of_2_v<129>;
+      CHECK_EQUAL(false, actual);
+#endif
     }
 
     //*************************************************************************
@@ -379,6 +578,57 @@ namespace
       CHECK_EQUAL(1134903170U, (size_t)etl::fibonacci<45>::value);
       CHECK_EQUAL(1836311903U, (size_t)etl::fibonacci<46>::value);
       CHECK_EQUAL(2971215073U, (size_t)etl::fibonacci<47>::value);
+
+#if ETL_CPP14_SUPPORTED
+      CHECK_EQUAL(0U,          (size_t)etl::fibonacci_v<0>);
+      CHECK_EQUAL(1U,          (size_t)etl::fibonacci_v<1>);
+      CHECK_EQUAL(1U,          (size_t)etl::fibonacci_v<2>);
+      CHECK_EQUAL(2U,          (size_t)etl::fibonacci_v<3>);
+      CHECK_EQUAL(3U,          (size_t)etl::fibonacci_v<4>);
+      CHECK_EQUAL(5U,          (size_t)etl::fibonacci_v<5>);
+      CHECK_EQUAL(8U,          (size_t)etl::fibonacci_v<6>);
+      CHECK_EQUAL(13U,         (size_t)etl::fibonacci_v<7>);
+      CHECK_EQUAL(21U,         (size_t)etl::fibonacci_v<8>);
+      CHECK_EQUAL(34U,         (size_t)etl::fibonacci_v<9>);
+      CHECK_EQUAL(55U,         (size_t)etl::fibonacci_v<10>);
+      CHECK_EQUAL(89U,         (size_t)etl::fibonacci_v<11>);
+      CHECK_EQUAL(144U,        (size_t)etl::fibonacci_v<12>);
+      CHECK_EQUAL(233U,        (size_t)etl::fibonacci_v<13>);
+      CHECK_EQUAL(377U,        (size_t)etl::fibonacci_v<14>);
+      CHECK_EQUAL(610U,        (size_t)etl::fibonacci_v<15>);
+      CHECK_EQUAL(987U,        (size_t)etl::fibonacci_v<16>);
+      CHECK_EQUAL(1597U,       (size_t)etl::fibonacci_v<17>);
+      CHECK_EQUAL(2584U,       (size_t)etl::fibonacci_v<18>);
+      CHECK_EQUAL(4181U,       (size_t)etl::fibonacci_v<19>);
+      CHECK_EQUAL(6765U,       (size_t)etl::fibonacci_v<20>);
+      CHECK_EQUAL(10946U,      (size_t)etl::fibonacci_v<21>);
+      CHECK_EQUAL(17711U,      (size_t)etl::fibonacci_v<22>);
+      CHECK_EQUAL(28657U,      (size_t)etl::fibonacci_v<23>);
+      CHECK_EQUAL(46368U,      (size_t)etl::fibonacci_v<24>);
+      CHECK_EQUAL(75025U,      (size_t)etl::fibonacci_v<25>);
+      CHECK_EQUAL(121393U,     (size_t)etl::fibonacci_v<26>);
+      CHECK_EQUAL(196418U,     (size_t)etl::fibonacci_v<27>);
+      CHECK_EQUAL(317811U,     (size_t)etl::fibonacci_v<28>);
+      CHECK_EQUAL(514229U,     (size_t)etl::fibonacci_v<29>);
+      CHECK_EQUAL(832040U,     (size_t)etl::fibonacci_v<30>);
+      CHECK_EQUAL(1346269U,    (size_t)etl::fibonacci_v<31>);
+      CHECK_EQUAL(2178309U,    (size_t)etl::fibonacci_v<32>);
+      CHECK_EQUAL(3524578U,    (size_t)etl::fibonacci_v<33>);
+      CHECK_EQUAL(5702887U,    (size_t)etl::fibonacci_v<34>);
+      CHECK_EQUAL(9227465U,    (size_t)etl::fibonacci_v<35>);
+      CHECK_EQUAL(14930352U,   (size_t)etl::fibonacci_v<36>);
+      CHECK_EQUAL(24157817U,   (size_t)etl::fibonacci_v<37>);
+      CHECK_EQUAL(39088169U,   (size_t)etl::fibonacci_v<38>);
+      CHECK_EQUAL(63245986U,   (size_t)etl::fibonacci_v<39>);
+      CHECK_EQUAL(102334155U,  (size_t)etl::fibonacci_v<40>);
+      CHECK_EQUAL(165580141U,  (size_t)etl::fibonacci_v<41>);
+      CHECK_EQUAL(267914296U,  (size_t)etl::fibonacci_v<42>);
+      CHECK_EQUAL(433494437U,  (size_t)etl::fibonacci_v<43>);
+      CHECK_EQUAL(701408733U,  (size_t)etl::fibonacci_v<44>);
+      CHECK_EQUAL(1134903170U, (size_t)etl::fibonacci_v<45>);
+      CHECK_EQUAL(1836311903U, (size_t)etl::fibonacci_v<46>);
+      CHECK_EQUAL(2971215073U, (size_t)etl::fibonacci_v<47>);
+#endif
     }
 
     TEST(test_factorial)
@@ -396,6 +646,22 @@ namespace
       CHECK_EQUAL(3628800U,   (size_t)etl::factorial<10>::value);
       CHECK_EQUAL(39916800U,  (size_t)etl::factorial<11>::value);
       CHECK_EQUAL(479001600U, (size_t)etl::factorial<12>::value);
+
+#if ETL_CPP14_SUPPORTED
+      CHECK_EQUAL(1U,         (size_t)etl::factorial_v<0>);
+      CHECK_EQUAL(1U,         (size_t)etl::factorial_v<1>);
+      CHECK_EQUAL(2U,         (size_t)etl::factorial_v<2>);
+      CHECK_EQUAL(6U,         (size_t)etl::factorial_v<3>);
+      CHECK_EQUAL(24U,        (size_t)etl::factorial_v<4>);
+      CHECK_EQUAL(120U,       (size_t)etl::factorial_v<5>);
+      CHECK_EQUAL(720U,       (size_t)etl::factorial_v<6>);
+      CHECK_EQUAL(5040U,      (size_t)etl::factorial_v<7>);
+      CHECK_EQUAL(40320U,     (size_t)etl::factorial_v<8>);
+      CHECK_EQUAL(362880U,    (size_t)etl::factorial_v<9>);
+      CHECK_EQUAL(3628800U,   (size_t)etl::factorial_v<10>);
+      CHECK_EQUAL(39916800U,  (size_t)etl::factorial_v<11>);
+      CHECK_EQUAL(479001600U, (size_t)etl::factorial_v<12>);
+#endif
     }
 
     //*************************************************************************
@@ -411,6 +677,19 @@ namespace
       CHECK_EQUAL(sqrt(8),  etl::sqrt<8>::value);
       CHECK_EQUAL(sqrt(9),  etl::sqrt<9>::value);
       CHECK_EQUAL(sqrt(10), etl::sqrt<10>::value);
+
+#if ETL_CPP14_SUPPORTED
+      CHECK_EQUAL(sqrt(1),  etl::sqrt_v<1>);
+      CHECK_EQUAL(sqrt(2),  etl::sqrt_v<2>);
+      CHECK_EQUAL(sqrt(3),  etl::sqrt_v<3>);
+      CHECK_EQUAL(sqrt(4),  etl::sqrt_v<4>);
+      CHECK_EQUAL(sqrt(5),  etl::sqrt_v<5>);
+      CHECK_EQUAL(sqrt(6),  etl::sqrt_v<6>);
+      CHECK_EQUAL(sqrt(7),  etl::sqrt_v<7>);
+      CHECK_EQUAL(sqrt(8),  etl::sqrt_v<8>);
+      CHECK_EQUAL(sqrt(9),  etl::sqrt_v<9>);
+      CHECK_EQUAL(sqrt(10), etl::sqrt_v<10>);
+#endif
     }
 
     //*************************************************************************

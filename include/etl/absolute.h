@@ -31,6 +31,7 @@ SOFTWARE.
 #ifndef ETL_ABSOLUTE_INCLUDED
 #define ETL_ABSOLUTE_INCLUDED
 
+#include "platform.h"
 #include "type_traits.h"
 
 namespace etl
@@ -39,6 +40,7 @@ namespace etl
   // For signed types.
   //***************************************************************************
   template <typename T>
+  ETL_CONSTEXPR_11
   typename etl::enable_if<etl::is_signed<T>::value, T>::type
     absolute(T value)
   {
@@ -49,6 +51,7 @@ namespace etl
   // For unsigned types.
   //***************************************************************************
   template <typename T>
+  ETL_CONSTEXPR_11
   typename etl::enable_if<etl::is_unsigned<T>::value, T>::type
     absolute(T value)
   {

@@ -5,7 +5,7 @@ The MIT License(MIT)
 
 Embedded Template Library.
 https://github.com/ETLCPP/etl
-http://www.etlcpp.com
+https://www.etlcpp.com
 
 Copyright(c) 2014 jwellbelove
 
@@ -41,17 +41,19 @@ SOFTWARE.
 /// power<N, POWER> : Calculates N to the power POWER.
 ///\ingroup maths
 
-namespace etl 
+namespace etl
 {
   //***************************************************************************
   ///\ingroup power
   /// Calculates powers.
   ///\note Only supports positive N.
   //***************************************************************************
-  template <const size_t NV, const size_t POWER>
+  template <const int NV, const int POWER, typename TValue = int>
   struct power
   {
-    static const uint64_t value = NV * power<NV, POWER - 1>::value;
+    typedef TValue value_type;
+
+    static const value_type value = NV * power<NV, POWER - 1, TValue>::value;
   };
 
   //***************************************************************************
@@ -59,23 +61,29 @@ namespace etl
   ///\note Only supports positive N.
   /// Specialisation for POWER == 0.
   //***************************************************************************
-  template <const size_t NV>
-  struct power<NV, 0>
+  template <const int NV, typename TValue>
+  struct power<NV, 0, TValue>
   {
-    static const uint64_t value = 1;
+    typedef TValue value_type;
+
+    static const value_type value = 1;
   };
+
+#if ETL_CPP14_SUPPORTED
+  template <const int NV, const int POWER, typename TValue = int>
+  constexpr uint64_t power_v = etl::power<NV, POWER, TValue>::value;
+#endif
 
   //***************************************************************************
   ///\ingroup power
   /// Calculates the rounded up power of 2.
   //***************************************************************************
-  template <const size_t NV>
+  template <const int NV, typename TValue = int>
   struct power_of_2_round_up
   {
-    enum value_type
-    {
-      value = 1 << (etl::log2<NV - 1>::value + 1)
-    };
+    typedef TValue value_type;
+
+    static const value_type value = 1 << (etl::log2<NV - 1, TValue>::value + 1);
   };
 
   //***************************************************************************
@@ -83,26 +91,29 @@ namespace etl
   /// Calculates the rounded up power of 2.
   /// Specialisation for 0.
   //***************************************************************************
-  template <>
-  struct power_of_2_round_up<0>
+  template <typename TValue>
+  struct power_of_2_round_up<0, TValue>
   {
-    enum value_type
-    {
-      value = 2
-    };
+    typedef TValue value_type;
+
+    static const value_type value = 2;
   };
+
+#if ETL_CPP14_SUPPORTED
+  template <const int NV, typename TValue = int>
+  constexpr TValue power_of_2_round_up_v = etl::power_of_2_round_up<NV, TValue>::value;
+#endif
 
   //***************************************************************************
   ///\ingroup power
   /// Calculates the rounded down power of 2.
   //***************************************************************************
-  template <const size_t NV>
+  template <const int NV, typename TValue = int>
   struct power_of_2_round_down
   {
-    enum value_type
-    {
-      value = 1 << (etl::log2<NV - 1>::value)
-    };
+    typedef TValue value_type;
+
+    static const value_type value = 1 << (etl::log2<NV - 1, TValue>::value);
   };
 
   //***************************************************************************
@@ -110,13 +121,12 @@ namespace etl
   /// Calculates the rounded down power of 2.
   /// Specialisation for 0.
   //***************************************************************************
-  template <>
-  struct power_of_2_round_down<0>
+  template <typename TValue>
+  struct power_of_2_round_down<0, TValue>
   {
-    enum value_type
-    {
-      value = 2
-    };
+    typedef TValue value_type;
+
+    static const value_type value = 2;
   };
 
   //***************************************************************************
@@ -124,13 +134,12 @@ namespace etl
   /// Calculates the rounded down power of 2.
   /// Specialisation for 1.
   //***************************************************************************
-  template <>
-  struct power_of_2_round_down<1>
+  template <typename TValue>
+  struct power_of_2_round_down<1, TValue>
   {
-    enum value_type
-    {
-      value = 2
-    };
+    typedef TValue value_type;
+
+    static const value_type value = 2;
   };
 
   //***************************************************************************
@@ -138,20 +147,24 @@ namespace etl
   /// Calculates the rounded down power of 2.
   /// Specialisation for 2.
   //***************************************************************************
-  template <>
-  struct power_of_2_round_down<2>
+  template <typename TValue>
+  struct power_of_2_round_down<2, TValue>
   {
-    enum value_type
-    {
-      value = 2
-    };
+    typedef TValue value_type;
+
+    static const value_type value = 2;
   };
+
+#if ETL_CPP14_SUPPORTED
+  template <const int NV, typename TValue = int>
+  constexpr TValue power_of_2_round_down_v = etl::power_of_2_round_down<NV, TValue>::value;
+#endif
 
   //***************************************************************************
   ///\ingroup power
   /// Checks if N is a power of 2.
   //***************************************************************************
-  template <const size_t NV>
+  template <const int NV>
   struct is_power_of_2
   {
     static const bool value = (NV & (NV - 1)) == 0;
@@ -178,6 +191,11 @@ namespace etl
   {
     static const bool value = false;
   };
+
+#if ETL_CPP14_SUPPORTED
+  template <const int NV>
+  constexpr bool is_power_of_2_v = etl::is_power_of_2<NV>::value;
+#endif
 }
 
 #endif

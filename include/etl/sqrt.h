@@ -37,7 +37,7 @@ SOFTWARE.
 #include "type_traits.h"
 #include "constant.h"
 
-namespace etl 
+namespace etl
 {
   //***************************************************************************
   /// Calculates the smallest value that, when squared, will be not greater than VALUE.
@@ -45,7 +45,7 @@ namespace etl
   template <const size_t VALUE, const size_t I = 1>
   struct sqrt
   {
-    typedef typename etl::conditional<((I * I) > VALUE), 
+    typedef typename etl::conditional<((I * I) > VALUE),
                                       etl::constant<intmax_t, I - 1>,
                                       etl::sqrt<VALUE, I + 1> >::type type;
 
@@ -55,6 +55,11 @@ namespace etl
       value = type::value
     };
   };
+
+#if ETL_CPP14_SUPPORTED
+  template <const size_t VALUE, const size_t I = 1>
+  constexpr size_t sqrt_v = etl::sqrt<VALUE, I>::value;
+#endif
 }
 
 #endif

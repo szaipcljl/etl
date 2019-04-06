@@ -39,7 +39,7 @@ SOFTWARE.
 /// fibonacci<N> : Calculates the Nth factorial value.
 ///\ingroup maths
 
-namespace etl 
+namespace etl
 {
   //***************************************************************************
   ///\ingroup fibonacci
@@ -60,6 +60,11 @@ namespace etl
   {
     static const size_t value = 1;
   };
+
+#if ETL_CPP14_SUPPORTED
+  template <const size_t N>
+  constexpr size_t factorial_v = etl::factorial<N>::value;
+#endif
 }
 
 #endif

@@ -851,12 +851,12 @@ namespace etl
       typedef T* pointer;
       typedef T& reference;
 
-      ETL_CONSTEXPR unique_ptr()
+      ETL_CONSTEXPR_11 unique_ptr()
       	: p(nullptr)
       {
       }
 
-      ETL_CONSTEXPR explicit unique_ptr (pointer p_)
+      ETL_CONSTEXPR_11 explicit unique_ptr (pointer p_)
         : p(p_)
       {
       }
@@ -873,7 +873,7 @@ namespace etl
         deleter(p);
       }
 
-      ETL_CONSTEXPR pointer	get() const
+      ETL_CONSTEXPR_11 pointer	get() const
       {
         return p;
       }
@@ -910,7 +910,7 @@ namespace etl
         std::swap(p, value.p);
       }
 
-      ETL_CONSTEXPR operator bool() const
+      ETL_CONSTEXPR_11 operator bool() const
       {
         return (p != nullptr);
       }
@@ -931,32 +931,32 @@ namespace etl
       }
 #endif
 
-      ETL_CONSTEXPR reference	operator *() const
+      ETL_CONSTEXPR_11 reference	operator *() const
       {
         return *get();
       }
 
-      ETL_CONSTEXPR pointer	operator ->() const
+      ETL_CONSTEXPR_11 pointer	operator ->() const
       {
         return get();
       }
 
-      ETL_CONSTEXPR reference	operator [](size_t i) const
+      ETL_CONSTEXPR_11 reference	operator [](size_t i) const
       {
         return get()[i];
       }
 
-      ETL_CONSTEXPR bool operator== (const pointer p_) const
+      ETL_CONSTEXPR_11 bool operator== (const pointer p_) const
       {
         return p == p_;
       }
 
-      ETL_CONSTEXPR bool operator== (const unique_ptr& p_) const
+      ETL_CONSTEXPR_11 bool operator== (const unique_ptr& p_) const
       {
         return p == p_.p;
       }
 
-      ETL_CONSTEXPR bool operator< (const unique_ptr& p_) const
+      ETL_CONSTEXPR_11 bool operator< (const unique_ptr& p_) const
       {
         return p < p_.p;
       }
@@ -986,12 +986,12 @@ namespace etl
     typedef T* pointer;
     typedef T& reference;
 
-    ETL_CONSTEXPR		unique_ptr()
+    ETL_CONSTEXPR_11		unique_ptr()
       : p(nullptr)
     {
     }
 
-    ETL_CONSTEXPR explicit unique_ptr(pointer p_)
+    ETL_CONSTEXPR_11 explicit unique_ptr(pointer p_)
       : p(p_)
     {
     }
@@ -1008,7 +1008,7 @@ namespace etl
       deleter(p);
     }
 
-    ETL_CONSTEXPR pointer	get() const
+    ETL_CONSTEXPR_11 pointer	get() const
     {
       return p;
     }
@@ -1044,7 +1044,7 @@ namespace etl
       std::swap(p, v.p);
     }
 
-    ETL_CONSTEXPR operator bool() const
+    ETL_CONSTEXPR_11 operator bool() const
     {
       return (p != nullptr);
     }
@@ -1065,32 +1065,32 @@ namespace etl
     }
 #endif
 
-    ETL_CONSTEXPR reference	operator *() const
+    ETL_CONSTEXPR_11 reference	operator *() const
     {
       return *p;
     }
 
-    ETL_CONSTEXPR pointer	operator ->() const
+    ETL_CONSTEXPR_11 pointer	operator ->() const
     {
       return p;
     }
 
-    ETL_CONSTEXPR reference	operator [](size_t i) const
+    ETL_CONSTEXPR_11 reference	operator [](size_t i) const
     {
       return p[i];
     }
 
-    ETL_CONSTEXPR bool operator ==(const pointer p_) const
+    ETL_CONSTEXPR_11 bool operator ==(const pointer p_) const
     {
       return (p == p_);
     }
 
-    ETL_CONSTEXPR bool operator ==(const unique_ptr& p_) const
+    ETL_CONSTEXPR_11 bool operator ==(const unique_ptr& p_) const
     {
       return (p == p_.p);
     }
 
-    ETL_CONSTEXPR bool operator <(const unique_ptr& p_) const
+    ETL_CONSTEXPR_11 bool operator <(const unique_ptr& p_) const
     {
       return (p < p_.p);
     }

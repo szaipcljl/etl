@@ -5,7 +5,7 @@ The MIT License(MIT)
 
 Embedded Template Library.
 https://github.com/ETLCPP/etl
-http://www.etlcpp.com
+https://www.etlcpp.com
 
 Copyright(c) 2014 jwellbelove
 
@@ -41,7 +41,7 @@ SOFTWARE.
 /// log10<N>     : Calculates logs to base 10, rounded down to the nearest integer.<br>
 ///\ingroup maths
 
-namespace etl 
+namespace etl
 {
   //***************************************************************************
   ///\ingroup log
@@ -51,65 +51,75 @@ namespace etl
   ///\tparam NV   The number to find the log of.
   ///\tparam BASE The base of the log.
   //***************************************************************************
-  template <const size_t NV, const size_t BASE>
+  template <const size_t NV, const size_t BASE, typename TValue = int>
   struct log
   {
-    enum value_type
-    {
-      // Recursive definition.
-      value = (NV >= BASE) ? 1 + log<NV / BASE, BASE>::value : 0
-    };
+    typedef TValue value_type;
+
+    // Recursive definition.
+    static const value_type value = (NV >= BASE) ? 1 + log<NV / BASE, BASE, TValue>::value : 0;
   };
 
   //***************************************************************************
   // Specialisation for N = 1
   //***************************************************************************
-  template <const size_t BASE>
-  struct log<1, BASE>
+  template <const size_t BASE, typename TValue>
+  struct log<1, BASE, TValue>
   {
-    enum value_type
-    {
-      value = 0
-    };
+    typedef TValue value_type;
+
+    static const value_type value = 0;
   };
 
   //***************************************************************************
   // Specialisation for N = 0
   //***************************************************************************
-  template <const size_t BASE>
-  struct log<0, BASE>
+  template <const size_t BASE, typename TValue>
+  struct log<0, BASE, TValue>
   {
-    enum value_type
-    {
-      value = 0
-    };
+    typedef TValue value_type;
+
+    static const value_type value = 0;
   };
+
+#if ETL_CPP14_SUPPORTED
+  template <const size_t NV, const size_t BASE, typename TValue = int>
+  constexpr TValue log_v = etl::log<NV, BASE, TValue>::value;
+#endif
 
   //***************************************************************************
   ///\ingroup log
   /// Calculates base 2 logs.
   //***************************************************************************
-  template <const size_t NV>
+  template <const size_t NV, typename TValue = int>
   struct log2
   {
-    enum value_type
-    {
-      value = log<NV, 2>::value
-    };
+    typedef TValue value_type;
+
+    static const value_type value = log<NV, 2, TValue>::value;
   };
+
+#if ETL_CPP14_SUPPORTED
+  template <const size_t NV, typename TValue = int>
+  constexpr TValue log2_v = etl::log2<NV>::value;
+#endif
 
   //***************************************************************************
   ///\ingroup log
   /// Calculates base 10 logs.
   //***************************************************************************
-  template <const size_t NV>
+  template <const size_t NV, typename TValue = int>
   struct log10
   {
-    enum value_type
-    {
-      value = log<NV, 10>::value
-    };
+    typedef TValue value_type;
+
+    static const value_type value = log<NV, 10, TValue>::value;
   };
+
+#if ETL_CPP14_SUPPORTED
+  template <const size_t NV, typename TValue = int>
+  constexpr TValue log10_v = etl::log10<NV, TValue>::value;
+#endif
 }
 
 #endif

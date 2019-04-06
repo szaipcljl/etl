@@ -32,8 +32,14 @@ SOFTWARE.
 
 #include <list>
 
-namespace 
-{		
+namespace
+{
+  template <const size_t N>
+  struct Struct
+  {
+    static const size_t VALUE = N;
+  };
+
   SUITE(test_container)
   {
     //*************************************************************************
@@ -142,6 +148,11 @@ namespace
 
       size_t compiletime_size = sizeof(etl::array_size(data));
       CHECK_EQUAL(SIZE, compiletime_size);
+
+#if ETL_CPP14_SUPPORTED
+      Struct<etl::size(data)> s;
+      CHECK_EQUAL(SIZE, s.VALUE);
+#endif
     }
   };
 }

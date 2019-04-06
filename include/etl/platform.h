@@ -43,7 +43,7 @@ SOFTWARE.
 #endif
 
 // Undefine all of the macros.
-#undef ETL_PLATFORM_16BIT 
+#undef ETL_PLATFORM_16BIT
 #undef ETL_PLATFORM_32BIT
 #undef ETL_PLATFORM_64BIT
 #undef ETL_CPP11_SUPPORTED
@@ -77,9 +77,15 @@ SOFTWARE.
 #endif
 
 #if ETL_CPP11_SUPPORTED
-  #define ETL_CONSTEXPR constexpr
+  #define ETL_CONSTEXPR_11 constexpr
 #else
-  #define ETL_CONSTEXPR
+  #define ETL_CONSTEXPR_11
+#endif
+
+#if ETL_CPP14_SUPPORTED
+#define ETL_CONSTEXPR_14 constexpr
+#else
+#define ETL_CONSTEXPR_14
 #endif
 
 #if ETL_CPP17_SUPPORTED

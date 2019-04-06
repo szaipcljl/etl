@@ -39,7 +39,7 @@ SOFTWARE.
 /// fibonacci<N> : Calculates the Nth Fibonacci value.
 ///\ingroup maths
 
-namespace etl 
+namespace etl
 {
   //***************************************************************************
   ///\ingroup fibonacci
@@ -69,6 +69,11 @@ namespace etl
   {
     static const size_t value = 0;
   };
+
+#if ETL_CPP14_SUPPORTED
+  template <const size_t N>
+  constexpr size_t fibonacci_v = etl::fibonacci<N>::value;
+#endif
 }
 
 #endif
