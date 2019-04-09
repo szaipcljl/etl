@@ -7,7 +7,7 @@ Embedded Template Library.
 https://github.com/ETLCPP/etl
 https://www.etlcpp.com
 
-Copyright(c) 2018 jwellbelove
+Copyright(c) 2019 jwellbelove
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files(the "Software"), to deal
@@ -28,24 +28,18 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ******************************************************************************/
 
-#ifndef ETL_VERSION_INCLUDED
-#define ETL_VERSION_INCLUDED
+#ifndef ETL_U16FORMAT_SPEC_INCLUDED
+#define ETL_U16FORMAT_SPEC_INCLUDED
 
-#include "macros.h"
+///\ingroup string
 
-///\defgroup version version
-/// Definitions of the ETL version
-///\ingroup utilities
+#include "platform.h"
+#include "basic_format_spec.h"
+#include "u16string.h"
 
-#define ETL_VERSION_MAJOR 14
-#define ETL_VERSION_MINOR 18
-#define ETL_VERSION_PATCH  1
-
-#define ETL_VERSION       ETL_STRINGIFY(ETL_VERSION_MAJOR) ETL_STRINGIFY(ETL_VERSION_MINOR) ETL_STRINGIFY(ETL_VERSION_PATCH)
-#define ETL_VERSION_W     ETL_WIDE_STRING(ETL_CONCAT(ETL_CONCAT(ETL_VERSION_MAJOR, ETL_VERSION_MINOR), ETL_VERSION_PATCH))
-#define ETL_VERSION_U16   ETL_U16_STRING(ETL_CONCAT(ETL_CONCAT(ETL_VERSION_MAJOR, ETL_VERSION_MINOR), ETL_VERSION_PATCH))
-#define ETL_VERSION_U32   ETL_U32_STRING(ETL_CONCAT(ETL_CONCAT(ETL_VERSION_MAJOR, ETL_VERSION_MINOR), ETL_VERSION_PATCH))
-#define ETL_VERSION_VALUE ((ETL_VERSION_MAJOR * 10000) + (ETL_VERSION_MINOR * 100) + ETL_VERSION_PATCH)
+namespace etl
+{
+  typedef etl::basic_format_spec<etl::iu16string> u16format_spec;
+}
 
 #endif
-
