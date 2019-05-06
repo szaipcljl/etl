@@ -1134,22 +1134,6 @@ namespace etl
                 sizeof(T),
                 static_cast<char>(value));
   }
-
-  //*****************************************************************************
-  /// Base class for objects that require their memory to be wiped after use.
-  /// Erases the object's memory to zero.
-  /// Note: This <b>must</b> be the last destructor called for the derived object.
-  ///\tparam T The derived type.
-  ///\ingroup memory
-  //*****************************************************************************
-  template <typename T>
-  struct wipe_on_destruct
-  {
-    ~wipe_on_destruct()
-    {
-      memory_clear(static_cast<T&>(*this));
-    }
-  };
 }
 
 #endif
