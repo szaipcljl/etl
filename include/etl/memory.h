@@ -1107,23 +1107,6 @@ namespace etl
   };
 
   //*****************************************************************************
-  /// Base class for objects that require their memory to be wiped after use.
-  /// Erases the object's memory to zero.
-  /// Note: This <b>must</b> be the last destructor called for the derived object.
-  ///\tparam T The derived type.
-  ///\ingroup memory
-  //*****************************************************************************
-  template <typename T>
-  struct wipe_on_destruct
-  {
-    ~wipe_on_destruct()
-    {
-      char* pobject = reinterpret_cast<char*>(static_cast<T*>(this));
-      std::fill_n(pobject, sizeof(T), 0);
-    }
-  };
-
-  //*****************************************************************************
   /// A low level function that clears an object's memory to zero.
   ///\tparam T The type.
   ///\param  object The object to clear.
@@ -1132,8 +1115,8 @@ namespace etl
   template <typename T>
   void memory_clear(T &object)
   {
-    std::fill_n(reinterpret_cast<char*>(&object), 
-                sizeof(T), 
+    std::fill_n(reinterpret_cast<char*>(&object),
+                sizeof(T),
                 0);
   }
 
@@ -1147,10 +1130,26 @@ namespace etl
   template <typename T>
   void memory_set(T &object, int value)
   {
-    std::fill_n(reinterpret_cast<char*>(&object), 
-                sizeof(T), 
+    std::fill_n(reinterpret_cast<char*>(&object),
+                sizeof(T),
                 static_cast<char>(value));
   }
+
+  //*****************************************************************************
+  /// Base class for objects that require their memory to be wiped after use.
+  /// Erases the object's memory to zero.
+  /// Note: This <b>must</b> be the last destructor called for the derived object.
+  ///\tparam T The derived type.
+  ///\ingroup memory
+  //*****************************************************************************
+  template <typename T>
+  struct wipe_on_destruct
+  {
+    ~wipe_on_destruct()
+    {
+      memory_clear(static_cast<T&>(*this));
+    }
+  };
 }
 
 #endif

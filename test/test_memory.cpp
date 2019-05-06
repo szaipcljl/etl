@@ -506,7 +506,7 @@ namespace
       std::fill(std::begin(n), std::end(n), 0xFF);
       CHECK_EQUAL(0x00000000U, etl::make_default_at(pn));
 
-      std::fill(std::begin(n), std::end(n), 0x00);      
+      std::fill(std::begin(n), std::end(n), 0x00);
       CHECK_EQUAL(0xFFFFFFFFU, etl::make_value_at(pn, 0xFFFFFFFFU));
 
       std::fill(std::begin(n), std::end(n), 0xFF);
@@ -569,6 +569,89 @@ namespace
 
       // Storage should be wiped.
       CHECK(buffer == clear);
+    }
+
+    //*************************************************************************
+    TEST(test_wipe_on_destruct_multiple_inhertance)
+    {
+      struct Base
+      {
+        virtual ~Base()
+        {
+        }
+      };
+
+      struct Data : public etl::wipe_on_destruct<Data>, public Base
+      {
+        Data(int a_, char b_, double c_)
+          : a(a_),
+          b(b_),
+          c(c_)
+        {
+        }
+
+        bool operator ==(const Data& other) const
+        {
+          return (a == other.a) && (b == other.b) && (c == other.c);
+        }
+
+        int a;
+        char b;
+        double c;
+      };
+
+      std::array<char, sizeof(Data)> buffer;
+      buffer.fill(0);
+
+      // Construct in-place.
+      ::new (buffer.data()) Data(1, 'b', 3.4);
+
+      Data& other = *reinterpret_cast<Data*>(buffer.data());
+      CHECK(other == Data(1, 'b', 3.4));
+
+      // Cleared compare buffer.
+      std::array<char, sizeof(Data)> clear;
+      clear.fill(0);
+
+      // Destruct;
+      other.~Data();
+
+      // Storage should be wiped.
+      CHECK(buffer == clear);
+    }
+
+    //*************************************************************************
+    TEST(test_memory_clear)
+    {
+      struct Data
+      {
+        uint32_t d1;
+        char     d2;
+      };
+
+      Data data = { 0xFFFFFFFF, char(0xFF) };
+
+      etl::memory_clear(data);
+
+      CHECK_EQUAL(0x00000000, data.d1);
+      CHECK_EQUAL(0x00,       data.d2);
+    }
+
+    //*************************************************************************
+    TEST(test_memory_set)
+    {
+      struct Data
+      {
+        uint32_t d1;
+        char     d2;
+      };
+
+      Data data = { 0xFFFFFFFF, char(0xFF) };
+
+      etl::memory_set(data, 0x5A);
+
+      CHECK_EQUAL(0x5A5A5A5A, data.d1);
+      CHECK_EQUAL(0x5A,       data.d2);
     }
   };
 }
