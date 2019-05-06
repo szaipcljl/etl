@@ -55,6 +55,9 @@ namespace etl
   {
   public:
 
+    typedef iu16string base_type;
+    typedef iu16string interface_type;
+
     typedef iu16string::value_type value_type;
 
     static const size_t MAX_SIZE = MAX_SIZE_;
@@ -75,8 +78,7 @@ namespace etl
     u16string(const etl::u16string<MAX_SIZE_>& other)
       : iu16string(reinterpret_cast<value_type*>(&buffer), MAX_SIZE)
     {
-      this->initialise();
-      this->assign(other.begin(), other.end());
+      this->assign(other);
     }
 
     //*************************************************************************
@@ -86,7 +88,7 @@ namespace etl
     u16string(const etl::iu16string& other)
       : iu16string(reinterpret_cast<value_type*>(&buffer), MAX_SIZE)
     {
-      this->assign(other.begin(), other.end());
+      this->assign(other);
     }
 
     //*************************************************************************
@@ -100,8 +102,12 @@ namespace etl
     {
       ETL_ASSERT(position < other.size(), ETL_ERROR(string_out_of_bounds));
 
-      this->initialise();
       this->assign(other.begin() + position, other.begin() + position + length_);
+
+      if (other.truncated())
+      {
+        this->is_truncated = true;
+      }
     }
 
     //*************************************************************************
@@ -111,7 +117,6 @@ namespace etl
     u16string(const value_type* text)
       : iu16string(reinterpret_cast<value_type*>(&buffer), MAX_SIZE)
     {
-      this->initialise();
       this->assign(text, text + etl::char_traits<value_type>::length(text));
     }
 
@@ -123,7 +128,6 @@ namespace etl
     u16string(const value_type* text, size_t count)
       : iu16string(reinterpret_cast<value_type*>(&buffer), MAX_SIZE)
     {
-      this->initialise();
       this->assign(text, text + count);
     }
 
@@ -191,8 +195,18 @@ namespace etl
     {
       if (&rhs != this)
       {
-        this->assign(rhs.cbegin(), rhs.cend());
+        this->assign(rhs);
       }
+
+      return *this;
+    }
+
+    //*************************************************************************
+    /// Assignment operator.
+    //*************************************************************************
+    u16string& operator = (const value_type* text)
+    {
+      this->assign(text);
 
       return *this;
     }

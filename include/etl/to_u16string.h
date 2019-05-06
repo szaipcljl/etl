@@ -7,7 +7,7 @@ Embedded Template Library.
 https://github.com/ETLCPP/etl
 https://www.etlcpp.com
 
-Copyright(c) 2018 jwellbelove
+Copyright(c) 2019 jwellbelove
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files(the "Software"), to deal
@@ -28,24 +28,38 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ******************************************************************************/
 
-#ifndef ETL_VERSION_INCLUDED
-#define ETL_VERSION_INCLUDED
+#ifndef ETL_TO_U16STRING_INCLUDED
+#define ETL_TO_U16STRING_INCLUDED
 
-#include "macros.h"
+///\ingroup string
 
-///\defgroup version version
-/// Definitions of the ETL version
-///\ingroup utilities
+#include "platform.h"
+#include "type_traits.h"
+#include "u16string.h"
+#include "u16format_spec.h"
+#include "private/to_string_helper.h"
 
-#define ETL_VERSION_MAJOR 14
-#define ETL_VERSION_MINOR 21
-#define ETL_VERSION_PATCH  0
+namespace etl
+{
+  //***************************************************************************
+  /// Default format spec.
+  //***************************************************************************
+  template <typename T, const size_t SIZE>
+  const etl::iu16string& to_string(const T value, etl::u16string<SIZE>& str, const bool append = false)
+  {
+    etl::u16format_spec format;
 
-#define ETL_VERSION       ETL_STRINGIFY(ETL_VERSION_MAJOR) ETL_STRINGIFY(ETL_VERSION_MINOR) ETL_STRINGIFY(ETL_VERSION_PATCH)
-#define ETL_VERSION_W     ETL_WIDE_STRING(ETL_CONCAT(ETL_CONCAT(ETL_VERSION_MAJOR, ETL_VERSION_MINOR), ETL_VERSION_PATCH))
-#define ETL_VERSION_U16   ETL_U16_STRING(ETL_CONCAT(ETL_CONCAT(ETL_VERSION_MAJOR, ETL_VERSION_MINOR), ETL_VERSION_PATCH))
-#define ETL_VERSION_U32   ETL_U32_STRING(ETL_CONCAT(ETL_CONCAT(ETL_VERSION_MAJOR, ETL_VERSION_MINOR), ETL_VERSION_PATCH))
-#define ETL_VERSION_VALUE ((ETL_VERSION_MAJOR * 10000) + (ETL_VERSION_MINOR * 100) + ETL_VERSION_PATCH)
+    return private_to_string::to_string(value, static_cast<etl::iu16string&>(str), format, append);
+  }
+
+  //***************************************************************************
+  /// Supplied format spec.
+  //***************************************************************************
+  template <typename T, const size_t SIZE>
+  const etl::iu16string& to_string(const T value, etl::u16string<SIZE>& str, const etl::u16format_spec& format, const bool append = false)
+  {
+    return private_to_string::to_string(value, static_cast<etl::iu16string&>(str), format, append);
+  }
+}
 
 #endif
-
