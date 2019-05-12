@@ -372,6 +372,7 @@
     <ClInclude Include="..\..\include\etl\crc32_c.h" />
     <ClInclude Include="..\..\include\etl\cumulative_moving_average.h" />
     <ClInclude Include="..\..\include\etl\c\ecl_timer.h" />
+    <ClInclude Include="..\..\include\etl\delegate.h" />
     <ClInclude Include="..\..\include\etl\format_spec.h" />
     <ClInclude Include="..\..\include\etl\frame_check_sequence.h" />
     <ClInclude Include="..\..\include\etl\fsm.h" />
@@ -379,8 +380,10 @@
     <ClInclude Include="..\..\include\etl\callback_service.h" />
     <ClInclude Include="..\..\include\etl\largest_generator.h" />
     <ClInclude Include="..\..\include\etl\absolute.h" />
+    <ClInclude Include="..\..\include\etl\multicast_delegate.h" />
     <ClInclude Include="..\..\include\etl\multi_array.h" />
     <ClInclude Include="..\..\include\etl\negative.h" />
+    <ClInclude Include="..\..\include\etl\private\delegate_base.h" />
     <ClInclude Include="..\..\include\etl\private\to_string_helper.h" />
     <ClInclude Include="..\..\include\etl\queue_spsc_locked.h" />
     <ClInclude Include="..\..\include\etl\scaled_rounding.h" />
