@@ -45,8 +45,8 @@ SOFTWARE.
 
 ******************************************************************************/
 
-#ifndef ETL_PRIVATE_DELEGATE_BASE_INCLUDED
-#define ETL_PRIVATE_DELEGATE_BASE_INCLUDED
+#ifndef ETL_PRIVATE_DELEGATE_BASE_CPP03_INCLUDED
+#define ETL_PRIVATE_DELEGATE_BASE_CPP03_INCLUDED
 
 #include "../nullptr.h"
 
@@ -57,18 +57,16 @@ namespace etl
 	class delegate_base;
 
   //***************************************************************************
-	template<typename TReturn, typename ...TParams>
-	class delegate_base<TReturn(TParams...)>
+	template<typename TReturn, typename TParam>
+	class delegate_base<TReturn(TParam)>
   {
 	protected:
 
-		using stub_type = TReturn(*)(void* this_ptr, TParams...);
+		typedef TReturn(*stub_type)(void* this_ptr, TParams);
 
     //*************************************************************************
 		struct invocation_element
     {
-			invocation_element() = default;
-
       //***********************************************************************
 			invocation_element(void* this_ptr, stub_type stub)
         : object(this_ptr)
