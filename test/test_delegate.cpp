@@ -408,7 +408,7 @@ namespace
     {
       function_called = false;
 
-      etl::delegate<void(void)> d = etl::delegate<void(void)>::create<Test, &test_static, &Test::member_void>();
+      etl::delegate<void(void)> d = etl::delegate<void(void)>::create<Test, test_static, &Test::member_void>();
 
       d();
 
@@ -420,7 +420,7 @@ namespace
     {
       function_called = false;
 
-      const etl::delegate<void(void)> d = etl::delegate<void(void)>::create<Test, &test_static, &Test::member_void>();
+      const etl::delegate<void(void)> d = etl::delegate<void(void)>::create<Test, test_static, &Test::member_void>();
 
       d();
 

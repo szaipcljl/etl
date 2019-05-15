@@ -162,14 +162,14 @@ namespace etl
     }
 
     //*************************************************************************
-    template <typename T, T* Instance, TReturn(T::*Method)(TParams...)>
+    template <typename T, T& Instance, TReturn(T::*Method)(TParams...)>
     static delegate create()
     {
       return delegate(method_instance_stub<T, Instance, Method>);
     }
 
     //*************************************************************************
-    template <typename T, T const* Instance, TReturn(T::*Method)(TParams...) const>
+    template <typename T, T const& Instance, TReturn(T::*Method)(TParams...) const>
     static delegate create()
     {
       return delegate(method_instance_stub<T, Instance, Method>);
@@ -221,17 +221,17 @@ namespace etl
     }
 
     //*************************************************************************
-    template <typename T, T* Instance, TReturn(T::*Method)(TParams...)>
+    template <typename T, T& Instance, TReturn(T::*Method)(TParams...)>
     static TReturn method_instance_stub(void*, TParams... params)
     {
-      return (Instance->*Method)(params...);
+      return (Instance.*Method)(params...);
     }
 
     //*************************************************************************
-    template <typename T, T* const Instance, TReturn(T::*Method)(TParams...) const>
+    template <typename T, const T& Instance, TReturn(T::*Method)(TParams...) const>
     static TReturn const_method_instance_stub(void*, TParams... params)
     {
-      return (Instance->*Method)(params...);
+      return (Instance.*Method)(params...);
     }
 
     //*************************************************************************
