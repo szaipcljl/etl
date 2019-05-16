@@ -129,7 +129,7 @@ namespace etl
     /// Returns a const reference to the value at index 'i'.
     ///\param i The index of the element to access.
     //*************************************************************************
-    ETL_CONSTEXPR_11 const_reference at(size_t i) const
+    ETL_CONSTEXPR_14 const_reference at(size_t i) const
     {
       ETL_ASSERT(i < SIZE, ETL_ERROR(array_out_of_range));
 
@@ -151,7 +151,7 @@ namespace etl
     /// Returns a const reference to the value at index 'i'.
     ///\param i The index of the element to access.
     //*************************************************************************
-    ETL_CONSTEXPR_11 const_reference operator[](size_t i) const
+    ETL_CONSTEXPR_14 const_reference operator[](size_t i) const
     {
       return _buffer[i];
     }
@@ -167,7 +167,7 @@ namespace etl
     //*************************************************************************
     /// Returns a const reference to the first element.
     //*************************************************************************
-    ETL_CONSTEXPR_11 const_reference front() const
+    ETL_CONSTEXPR_14 const_reference front() const
     {
       return _buffer[0];
     }
@@ -183,7 +183,7 @@ namespace etl
     //*************************************************************************
     /// Returns a const reference to the last element.
     //*************************************************************************
-    ETL_CONSTEXPR_11 const_reference back() const
+    ETL_CONSTEXPR_14 const_reference back() const
     {
       return _buffer[SIZE - 1];
     }
@@ -199,7 +199,7 @@ namespace etl
     //*************************************************************************
     /// Returns a const pointer to the first element of the internal buffer.
     //*************************************************************************
-    ETL_CONSTEXPR_11 const_pointer data() const
+    ETL_CONSTEXPR_14 const_pointer data() const
     {
       return &_buffer[0];
     }
@@ -219,7 +219,7 @@ namespace etl
     //*************************************************************************
     /// Returns a const iterator to the beginning of the array.
     //*************************************************************************
-    ETL_CONSTEXPR_11 const_iterator begin() const ETL_NOEXCEPT
+    ETL_CONSTEXPR_14 const_iterator begin() const ETL_NOEXCEPT
     {
       return &_buffer[0];
     }
@@ -243,7 +243,7 @@ namespace etl
     //*************************************************************************
     /// Returns a const iterator to the end of the array.
     //*************************************************************************
-    ETL_CONSTEXPR_11 const_iterator end() const ETL_NOEXCEPT
+    ETL_CONSTEXPR_14 const_iterator end() const ETL_NOEXCEPT
     {
       return &_buffer[SIZE];
     }
@@ -251,7 +251,7 @@ namespace etl
     //*************************************************************************
     // Returns a const iterator to the end of the array.
     //*************************************************************************
-    ETL_CONSTEXPR_11 const_iterator cend() const ETL_NOEXCEPT
+    ETL_CONSTEXPR_14 const_iterator cend() const ETL_NOEXCEPT
     {
       return &_buffer[SIZE];
     }
@@ -267,7 +267,7 @@ namespace etl
     //*************************************************************************
     /// Returns a const reverse iterator to the reverse beginning of the array.
     //*************************************************************************
-    ETL_CONSTEXPR_11 const_reverse_iterator rbegin() const ETL_NOEXCEPT
+    ETL_CONSTEXPR_14 const_reverse_iterator rbegin() const ETL_NOEXCEPT
     {
       return const_reverse_iterator(end());
     }
@@ -275,7 +275,7 @@ namespace etl
     //*************************************************************************
     /// Returns a const reverse iterator to the reverse beginning of the array.
     //*************************************************************************
-    ETL_CONSTEXPR_11 const_reverse_iterator crbegin() const ETL_NOEXCEPT
+    ETL_CONSTEXPR_14 const_reverse_iterator crbegin() const ETL_NOEXCEPT
     {
       return const_reverse_iterator(end());
     }
@@ -291,7 +291,7 @@ namespace etl
     //*************************************************************************
     /// Returns a const reverse iterator to the end of the array.
     //*************************************************************************
-    ETL_CONSTEXPR_11 const_reverse_iterator rend() const ETL_NOEXCEPT
+    ETL_CONSTEXPR_14 const_reverse_iterator rend() const ETL_NOEXCEPT
     {
       return const_reverse_iterator(begin());
     }
@@ -299,7 +299,7 @@ namespace etl
     //*************************************************************************
     /// Returns a const reverse iterator to the end of the array.
     //*************************************************************************
-    ETL_CONSTEXPR_11 const_reverse_iterator crend() const ETL_NOEXCEPT
+    ETL_CONSTEXPR_14 const_reverse_iterator crend() const ETL_NOEXCEPT
     {
       return const_reverse_iterator(begin());
     }
@@ -311,7 +311,7 @@ namespace etl
     //*************************************************************************
     /// Returns <b>true</b> if the array size is zero.
     //*************************************************************************
-    ETL_CONSTEXPR_11 bool empty() const ETL_NOEXCEPT
+    ETL_CONSTEXPR_14 bool empty() const ETL_NOEXCEPT
     {
       return (SIZE == 0);
     }
@@ -319,7 +319,7 @@ namespace etl
     //*************************************************************************
     /// Returns the size of the array.
     //*************************************************************************
-    ETL_CONSTEXPR_11 size_t size() const ETL_NOEXCEPT
+    ETL_CONSTEXPR_14 size_t size() const ETL_NOEXCEPT
     {
       return SIZE;
     }
@@ -327,7 +327,7 @@ namespace etl
     //*************************************************************************
     /// Returns the maximum possible size of the array.
     //*************************************************************************
-    ETL_CONSTEXPR_11 size_t max_size() const ETL_NOEXCEPT
+    ETL_CONSTEXPR_14 size_t max_size() const ETL_NOEXCEPT
     {
       return SIZE;
     }
@@ -560,7 +560,7 @@ namespace etl
   ///\param rhs The second array.
   //*************************************************************************
   template <typename T, const size_t SIZE>
-  ETL_CONSTEXPR_11 void swap(etl::array<T, SIZE> &lhs, etl::array<T, SIZE> &rhs)
+  ETL_CONSTEXPR_14 void swap(etl::array<T, SIZE> &lhs, etl::array<T, SIZE> &rhs)
   {
     lhs.swap(rhs);
   }
@@ -572,7 +572,7 @@ namespace etl
   ///\return <b>true</b> if the arrays are equal, otherwise <b>false</b>
   //*************************************************************************
   template <typename T, size_t SIZE>
-  ETL_CONSTEXPR_11 bool operator ==(const etl::array<T, SIZE>& lhs, const etl::array<T, SIZE>& rhs)
+  ETL_CONSTEXPR_14 bool operator ==(const etl::array<T, SIZE>& lhs, const etl::array<T, SIZE>& rhs)
   {
     return std::equal(lhs.cbegin(), lhs.cend(), rhs.cbegin());
   }
@@ -584,7 +584,7 @@ namespace etl
   ///\return <b>true</b> if the arrays are not equal, otherwise <b>false</b>
   //*************************************************************************
   template <typename T, size_t SIZE>
-  ETL_CONSTEXPR_11 bool operator !=(const etl::array<T, SIZE>& lhs, const etl::array<T, SIZE>& rhs)
+  ETL_CONSTEXPR_14 bool operator !=(const etl::array<T, SIZE>& lhs, const etl::array<T, SIZE>& rhs)
   {
     return !(lhs == rhs);
   }
@@ -596,7 +596,7 @@ namespace etl
   ///\return <b>true</b> if the first array is lexicographically less than the second, otherwise <b>false</b>
   //*************************************************************************
   template <typename T, size_t SIZE>
-  ETL_CONSTEXPR_11 bool operator <(const etl::array<T, SIZE>& lhs, const etl::array<T, SIZE>& rhs)
+  ETL_CONSTEXPR_14 bool operator <(const etl::array<T, SIZE>& lhs, const etl::array<T, SIZE>& rhs)
   {
     return std::lexicographical_compare(lhs.cbegin(),
                                         lhs.cend(),
@@ -611,7 +611,7 @@ namespace etl
   ///\return <b>true</b> if the first array is lexicographically less than or equal to the second, otherwise <b>false</b>
   //*************************************************************************
   template <typename T, size_t SIZE>
-  ETL_CONSTEXPR_11 bool operator <=(const etl::array<T, SIZE>& lhs, const etl::array<T, SIZE>& rhs)
+  ETL_CONSTEXPR_14 bool operator <=(const etl::array<T, SIZE>& lhs, const etl::array<T, SIZE>& rhs)
   {
     return !(lhs > rhs);
   }
@@ -623,7 +623,7 @@ namespace etl
   ///\return <b>true</b> if the first array is lexicographically greater than the second, otherwise <b>false</b>
   template <typename T, size_t SIZE>
   //*************************************************************************
-  ETL_CONSTEXPR_11 bool operator >(const etl::array<T, SIZE>& lhs, const etl::array<T, SIZE>& rhs)
+  ETL_CONSTEXPR_14 bool operator >(const etl::array<T, SIZE>& lhs, const etl::array<T, SIZE>& rhs)
   {
     return (rhs < lhs);
   }
@@ -635,7 +635,7 @@ namespace etl
   ///\return <b>true</b> if the first array is lexicographically greater than or equal to the second, otherwise <b>false</b>
   //*************************************************************************
   template <typename T, size_t SIZE>
-  ETL_CONSTEXPR_11 bool operator >=(const etl::array<T, SIZE>& lhs, const etl::array<T, SIZE>& rhs)
+  ETL_CONSTEXPR_14 bool operator >=(const etl::array<T, SIZE>& lhs, const etl::array<T, SIZE>& rhs)
   {
     return !(lhs < rhs);
   }
@@ -649,7 +649,7 @@ namespace etl
   ///\return A reference to the element
   //*************************************************************************
   template <size_t I, typename T, size_t MAXN>
-  ETL_CONSTEXPR_11 inline T& get(array<T, MAXN>& a)
+  ETL_CONSTEXPR_14 inline T& get(array<T, MAXN>& a)
   {
     ETL_STATIC_ASSERT(I < MAXN, "Index out of bounds");
     return a[I];
@@ -664,7 +664,7 @@ namespace etl
   ///\return A const reference to the element
   //*************************************************************************
   template <size_t I, typename T, size_t MAXN>
-  ETL_CONSTEXPR_11 inline const T& get(const array<T, MAXN>& a)
+  ETL_CONSTEXPR_14 inline const T& get(const array<T, MAXN>& a)
   {
     ETL_STATIC_ASSERT(I < MAXN, "Index out of bounds");
     return a[I];
